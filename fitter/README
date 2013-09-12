@@ -1,0 +1,13 @@
+to make,  cd to bin and type "make"
+(the exe file called swt should appear one dir above)
+
+to run the example, cd to the example dirs
+and run with ../../fitter <pdb1> <pdb2> <residue list> 
+where <pdb1/2> are the files provided the example dir
+<residue list> is called cat_site.list there
+
+about the input order:
+the program fits the first structure so onto the second,
+so as to improve the fit to residues from the second structure given in the list
+
+the matrix for the improved alignemnt  is directed to stdout

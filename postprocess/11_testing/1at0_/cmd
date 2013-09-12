@@ -1,0 +1,10 @@
+align  1at0_.msf
+names  etc_out.best.0.names
+names  etc_out.best.1.names
+names  etc_out.best.2.names
+names  etc_out.best.3.names
+query query_1at0_
+special query_1at0_
+pdbf query_1at0_.pdb
+sink 0.3
+method ENTR

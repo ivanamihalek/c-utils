@@ -1,0 +1,56 @@
+reading the pdb file ...
+	 28279 atoms
+new chain found : A 
+new chain found : B 
+new chain found : C 
+new chain found : E 
+new chain found : F 
+new chain found : H 
+new chain found : I 
+new chain found : J 
+new chain found : K 
+new chain found : L 
+ reading pdb successful 
+ there are 10 chains.
+ avg no nbrs:     1.764
+ avg no nbrs for backbone:     3.444
+46       71       8      14     121      26.18       28.49 
+44      115      16      10      65      21.01       24.87 
+
+11       12       0       6      31      80.18       78.26 
+11       26       2       9      26      80.23       78.12 
+
+11       17       2       6      30      25.77       25.19 
+11       29       4       7      23      25.68       25.53 
+
+10       13       3       4      25       9.46        9.92 
+10       24       0       3      17       8.02        8.34 
+
+12       18       3       6      34      56.53       57.94 
+11       28       2       5      24      62.73       63.83 
+
+4        7       0       2      13       4.55        4.30 
+4        9       0       3       9       2.95        2.83 
+
+13       24       7       4      33       3.59        3.36 
+10       28       6       2      15       3.78        3.39 
+
+4        8       2       2      11      64.35       66.63 
+4       10       0       0       6      68.20       70.51 
+
+7       12       4       1      17       2.77        3.64 
+6       15       0       2      11       2.16        2.74 
+
+atom 28278  "OXT", aa ARG.
+9       14       4       8      27       4.55        1.84 
+7       16       0       7      18       2.45        1.01 
+
+11       17       4       6      28       0.29        1.17 
+8       19       2       4      13       0.48        0.28 
+
+6        9       3       2      16       0.33        0.11 
+6       15       1       3       8       0.46        0.07 
+
+3        3       1       2       8       0.05        0.21 
+3        6       0       2       6       0.09        0.24 
+

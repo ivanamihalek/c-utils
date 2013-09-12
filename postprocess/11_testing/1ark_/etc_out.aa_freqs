@@ -1,0 +1,63 @@
+    1 .     -     P   1     .  97    
+    2 T    1      A   7     D  10     E   4     G  16     H   2     I   1     K   5     L  13     M   3     N   3     P   6     Q   3     R   1     S   6     T   8     V   1     Y   1     .   1    
+    3 A    2      A   8     C   1     D   9     E  12     F   1     G  12     H   1     K   5     L  10     M   1     N   2     P   6     Q   6     R   2     S   6     T   5     V   4    
+    4 G    3      A   2     C   3     E   2     F   1     G  39     I   3     K   3     L   4     M   1     N   1     P   3     Q  10     R   6     S   4     V   4     W   1     Y   4    
+    5 K    4      D   1     E   9     F   2     G   9     I  11     K  17     L   5     M   2     P  13     Q   4     R   8     T   3     V   6     Y   2    
+    6 I    5      A   2     C  13     D   2     E   5     H   1     I   4     K   2     L   1     M   1     P   3     Q   1     R  27     S   6     T  16     V   5     W   2     .   2    
+    7 F    6      A  39     C   9     F   9     H   1     V  12     Y  28    
+    8 R    7      I   9     K  11     L   2     M   1     Q   5     R  50     T   4     V  13    
+    9 A    8      A  80     C   1     G   3     I   1     T   2     V  10    
+   10 M    9      E   5     I   8     K   4     L  49     M   8     Q   5     R   1     V  16    
+   11 Y   10      F   5     V   9     W   1     Y  82    
+   12 D   11      A   2     D  64     E   1     K   1     N   9     P   3     S  11     T   4    
+   13 Y   12      C   2     F  21     Y  74    
+   14 M   13      A   5     D   4     E  21     I   2     K   4     M   3     N   5     P   9     Q  20     R   2     S   9     T   5     V   3    
+   15 A   14      A  49     G  15     K   3     P  28    
+   16 .     -     .  99    
+   17 A   15      A  33     D  13     E  14     G   2     K   1     N   2     Q  25     R   4     S   1     T   1    
+   18 D   16      A   1     D  28     E  14     G   9     H   1     K   1     L   2     N  19     Q   1     S  10     T   7    
+   19 A   17      A   6     D  31     E  36     H   3     K   1     N   2     P   4     Q   4     R   1     S   4     T   1     V   1    
+   20 D   18      A   8     D  53     E   1     G   7     N   9     S   3     T   8     V   7    
+   21 E   19      E  98    
+   22 V   20      I  29     L  49     M   2     V  19    
+   23 S   21      A   1     E  19     G   9     S  58     T   8     Y   2    
+   24 F   22      F  75     L  23    
+   25 K   23      A   2     D  18     E   6     K  29     L   3     M   1     P   1     Q   8     R  20     S   3     V   2    
+   26 D   24      A   6     D  17     E  40     K   9     P  22     V   1    
+   27 G   25      D  13     E   2     G  77     N   5    
+   28 D   26      A   3     D  81     E  10     N   2     Q   2    
+   29 A   27      A   3     E   4     I  41     K   3     L   8     M   2     R   8     T   8     V  15     Y   4    
+   30 I   28      I  73     L   4     V  20    
+   31 I   29      C   2     D   4     E   1     F   9     H   1     I  13     L   2     M   1     N   1     Q   1     S   1     T  36     V  17     Y   5    
+   32 N   30      D   5     E   6     G   3     H   5     I   3     K   4     L  17     N  31     Q   2     V  19    
+   33 V   31      A   2     C   1     H   9     I  34     L  10     M   7     S   1     T   9     V  21    
+   34 Q   32      D   7     E  39     K  14     N   6     Q  17     R   7     S   4     Y   1    
+   35 A   33      A   3     D   3     E   4     F   6     K  24     M  15     P   5     Q  20     R   4     S   5     T   2     V   3    
+   36 I   34      C   8     E   4     H   1     I  36     L   1     P   1     Q   1     R   8     S   2     V  11     .  22    
+   37 D   35      D  63     E  10     I   8     K   1     N   2     S   3     V  10    
+   38 E   36      A   2     D  57     E  31     N   3     S   3    
+   39 .     -     D   6     E  13     Q   6     T   2     .  69    
+   40 G   37      A   1     D  10     E   1     G  68     H   1     N  16    
+   41 W   38      W 100    
+   42 M   39      C   4     F  13     L   3     M  22     W  34     Y  20    
+   43 Y   40      E  18     F   1     I   1     K  17     L   3     M   1     Q   6     R  17     S   3     T   3     V   9     Y  16    
+   44 G   41      G 100    
+   45 T   42      E   9     K   5     L   4     M   6     Q   4     R  12     T  42     V   8     Y   3    
+   46 V   43      A   2     C  14     F   1     G   5     H   3     I  10     L  25     N   3     S  10     V  21    
+   47 Q   44      A   3     D   2     E  12     H   3     K  10     L   1     M   2     N   5     P  12     Q  24     R  12     S   5     T   1     V   1    
+   48 R   45      A   1     D   6     G  24     K   2     N   1     R  40     S   6     T   1     .  14    
+   49 T   46      N   7     S   2     T  42     .  47    
+   50 G   47      E   1     G  68     K   2     L   1     N   3     R   2     S   2     .  17    
+   51 R   48      A   3     C   2     D   6     E  10     F   1     H   6     K  16     L   1     Q  10     R  36     T   2    
+   52 T   49      A   1     F  14     I   3     K   3     Q  10     R   2     S  11     T  34     V   7     W   1     Y   9    
+   53 G   50      G 100    
+   54 M   51      F   6     I  11     L  45     M  26     T   7     W   1    
+   55 L   52      F  70     I   4     L  20     V   1     Y   4    
+   56 P   53      P 100    
+   57 A   54      A  51     D   1     G  17     I   6     K   2     L   1     M   1     S  12     V   4    
+   58 N   55      N  79     S  17     T   3    
+   59 Y   56      F  12     Y  87    
+   60 V   57      C   1     I   3     V  95    
+   61 E   58      A   3     D   3     E  64     K   9     N   1     Q  11     R   1     S   2     V   1    
+   62 A   59      A  13     C   2     E   3     F   4     I   3     K   1     L  26     M   1     N   2     P   8     Q   1     R   4     S   7     V  17    
+   63 I   60      A   2     C   1     D   2     E   1     F   5     G   1     H   1     I  28     L  18     M   3     N   2     Q   4     R   5     S   1     T   1     V  16     Y   1    

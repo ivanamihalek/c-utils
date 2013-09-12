@@ -1,0 +1,13 @@
+
+  POSTP version 1.0.
+  by Ivana Mihalek, 2005
+  File produced on Tue Feb 28 17:04:04 2006
+
+  Options:
+  	 pdb file:               query_1cktA.pdb
+  	 alignment  file:        1cktA.msf
+  	 query  name:            query_1cktA
+  	 max fraction of gaps:   0.30
+  	 residue scoring method:  entropy
+  Warning:
+  	 No chain specified. Using the first one.

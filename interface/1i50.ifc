@@ -1,0 +1,1208 @@
+reading the pdb file ...
+	 28279 atoms
+new chain found : A 
+new chain found : B 
+new chain found : C 
+new chain found : E 
+new chain found : F 
+new chain found : H 
+new chain found : I 
+new chain found : J 
+new chain found : K 
+new chain found : L 
+ reading pdb successful 
+
+ chain starts: 
+ A: 0  B: 11154  C: 19865  E: 21960  F: 23720  H: 24399  I: 25467  J: 26464  K: 26996  L: 27915 
+
+ there are 10 chains.
+Chain  0, id A
+	               start:        0
+	                 end:    11153
+	  number of residues:     1419
+
+Chain  1, id B
+	               start:    11154
+	                 end:    19864
+	  number of residues:     1094
+
+Chain  2, id C
+	               start:    19865
+	                 end:    21959
+	  number of residues:      266
+
+Chain  3, id E
+	               start:    21960
+	                 end:    23719
+	  number of residues:      215
+
+Chain  4, id F
+	               start:    23720
+	                 end:    24398
+	  number of residues:       84
+
+Chain  5, id H
+	               start:    24399
+	                 end:    25466
+	  number of residues:      133
+
+Chain  6, id I
+	               start:    25467
+	                 end:    26463
+	  number of residues:      122
+
+Chain  7, id J
+	               start:    26464
+	                 end:    26995
+	  number of residues:       65
+
+Chain  8, id K
+	               start:    26996
+	                 end:    27914
+	  number of residues:      114
+
+Chain  9, id L
+	               start:    27915
+	                 end:    28278
+	  number of residues:       46
+
+chain 0 (A) interfaces 1 (B) through residues 
+	    2  VAL 
+	    5  GLN 
+	    6  TYR 
+	    7  SER 
+	    8  SER 
+	    9  ALA 
+	   10  PRO 
+	   11  LEU 
+	   12  ARG 
+	   13  THR 
+	   14  VAL 
+	   15  LYS 
+	   16  GLU 
+	   17  VAL 
+	   18  GLN 
+	   19  PHE 
+	   20  GLY 
+	   21  LEU 
+	   22  PHE 
+	   26  GLU 
+	   29  ALA 
+	   30  ILE 
+	   68  GLN 
+	   69  THR 
+	   70  CYS 
+	   71  GLN 
+	   72  GLU 
+	   75  ASN 
+	   76  GLU 
+	   77  CYS 
+	   78  PRO 
+	   79  GLY 
+	   81  PHE 
+	   92  HIS 
+	  236  LEU 
+	  238  CYS 
+	  240  PRO 
+	  245  PRO 
+	  246  VAL 
+	  304  MET 
+	  325  ILE 
+	  328  ARG 
+	  329  LEU 
+	  332  LYS 
+	  339  ASN 
+	  342  GLY 
+	  344  ARG 
+	  345  VAL 
+	  346  ASP 
+	  347  PHE 
+	  348  SER 
+	  349  ALA 
+	  350  ARG 
+	  351  THR 
+	  356  ASP 
+	  357  PRO 
+	  358  ASN 
+	  370  ILE 
+	  373  THR 
+	  374  LEU 
+	  412  ARG 
+	  443  LEU 
+	  445  ASN 
+	  447  GLN 
+	  449  SER 
+	  451  HIS 
+	  452  LYS 
+	  455  MET 
+	  465  TYR 
+	  466  SER 
+	  467  THR 
+	  469  ARG 
+	  472  LEU 
+	  481  ASP 
+	  482  PHE 
+	  483  ASP 
+	  484  GLY 
+	  486  GLU 
+	  488  ASN 
+	  490  HIS 
+	  493  GLN 
+	  494  SER 
+	  497  THR 
+	  500  GLU 
+	  501  LEU 
+	  504  LEU 
+	  505  CYS 
+	  510  GLN 
+	  525  GLN 
+	  526  ASP 
+	  529  CYS 
+	  657  LEU 
+	  658  LEU 
+	  659  HIS 
+	  660  ASN 
+	  661  GLY 
+	  662  PHE 
+	  663  SER 
+	  664  THR 
+	  665  GLY 
+	  666  ILE 
+	  668  ASP 
+	  670  ILE 
+	  746  MET 
+	  751  SER 
+	  752  LYS 
+	  757  ASN 
+	  760  GLN 
+	  761  MET 
+	  770  VAL 
+	  771  GLU 
+	  775  ILE 
+	  776  ALA 
+	  778  GLY 
+	  779  PHE 
+	  780  VAL 
+	  782  ARG 
+	  783  THR 
+	  784  LEU 
+	  785  PRO 
+	  786  HIS 
+	  787  PHE 
+	  789  LYS 
+	  801  GLU 
+	  802  ASN 
+	  804  TYR 
+	  805  LEU 
+	  806  ARG 
+	  807  GLY 
+	  808  LEU 
+	  809  THR 
+	  810  PRO 
+	  813  PHE 
+	  814  PHE 
+	  816  HIS 
+	  817  ALA 
+	  818  MET 
+	  821  ARG 
+	  822  GLU 
+	  824  LEU 
+	  825  ILE 
+	  838  GLN 
+	  839  ARG 
+	  842  VAL 
+	  846  GLU 
+	 1063  MET 
+	 1066  VAL 
+	 1070  GLN 
+	 1265  ASN 
+	 1269  GLU 
+	 1399  ARG 
+	 1409  LEU 
+	 1410  PHE 
+	 1418  LEU 
+	 1420  ASP 
+	 1421  CYS 
+	 1422  ARG 
+	 1424  VAL 
+	 1428  VAL 
+	 1429  ILE 
+	 1430  LEU 
+	 1431  GLY 
+	 1432  GLN 
+	 1433  MET 
+	 1434  ALA 
+	 1436  ILE 
+	 1437  GLY 
+	 1438  THR 
+	 1439  GLY 
+chain 1 (B) interfaces 0 (A) through residues 
+	  262  GLU 
+	  263  GLY 
+	  264  SER 
+	  400  HIS 
+	  510  LYS 
+	  512  ARG 
+	  513  GLN 
+	  514  LEU 
+	  515  HIS 
+	  516  ASN 
+	  517  THR 
+	  519  TRP 
+	  524  PRO 
+	  527  THR 
+	  620  ARG 
+	  698  GLU 
+	  699  GLU 
+	  701  ILE 
+	  702  LEU 
+	  703  ILE 
+	  705  MET 
+	  725  PRO 
+	  727  LYS 
+	  728  ARG 
+	  729  ILE 
+	  742  GLU 
+	  745  PRO 
+	  748  ILE 
+	  749  LEU 
+	  759  PRO 
+	  760  ASP 
+	  761  HIS 
+	  762  ASN 
+	  763  GLN 
+	  764  SER 
+	  767  ASN 
+	  768  THR 
+	  769  TYR 
+	  827  ILE 
+	  828  ALA 
+	  829  CYS 
+	  830  TYR 
+	  831  SER 
+	  832  GLY 
+	  833  TYR 
+	  835  GLN 
+	  836  GLU 
+	  837  ASP 
+	  838  SER 
+	  976  ILE 
+	  987  LYS 
+	  989  THR 
+	  991  GLY 
+	 1013  ASN 
+	 1014  PRO 
+	 1015  HIS 
+	 1018  PRO 
+	 1019  SER 
+	 1020  ARG 
+	 1021  MET 
+	 1023  VAL 
+	 1026  LEU 
+	 1027  ILE 
+	 1030  LEU 
+	 1047  PHE 
+	 1052  VAL 
+	 1067  ARG 
+	 1069  PHE 
+	 1074  ASN 
+	 1076  HIS 
+	 1081  LEU 
+	 1082  MET 
+	 1083  ALA 
+	 1084  GLN 
+	 1085  ILE 
+	 1086  PHE 
+	 1099  VAL 
+	 1100  ASP 
+	 1102  LYS 
+	 1103  ILE 
+	 1104  HIS 
+	 1105  ALA 
+	 1106  ARG 
+	 1107  ALA 
+	 1108  ARG 
+	 1109  GLY 
+	 1110  PRO 
+	 1127  GLY 
+	 1128  LEU 
+	 1129  ARG 
+	 1130  PHE 
+	 1132  GLU 
+	 1133  MET 
+	 1134  GLU 
+	 1135  ARG 
+	 1136  ASP 
+	 1137  CYS 
+	 1138  MET 
+	 1139  ILE 
+	 1140  ALA 
+	 1141  HIS 
+	 1142  GLY 
+	 1143  ALA 
+	 1144  ALA 
+	 1145  SER 
+	 1146  PHE 
+	 1148  LYS 
+	 1149  GLU 
+	 1150  ARG 
+	 1151  LEU 
+	 1152  MET 
+	 1153  GLU 
+	 1157  ALA 
+	 1158  PHE 
+	 1159  ARG 
+	 1161  HIS 
+	 1168  LEU 
+	 1170  THR 
+	 1172  ILE 
+	 1173  ALA 
+	 1174  LYS 
+	 1175  LEU 
+	 1176  ASN 
+	 1177  HIS 
+	 1178  ASN 
+	 1180  PHE 
+	 1183  LYS 
+	 1184  GLY 
+	 1191  ILE 
+	 1192  TYR 
+	 1193  GLN 
+	 1194  ILE 
+	 1195  HIS 
+	 1196  ILE 
+	 1197  PRO 
+	 1198  TYR 
+	 1200  ALA 
+	 1201  LYS 
+	 1203  LEU 
+	 1205  GLN 
+	 1206  GLU 
+	 1207  LEU 
+	 1208  MET 
+	 1209  ALA 
+	 1210  MET 
+	 1211  ASN 
+	 1212  ILE 
+	 1213  THR 
+	 1214  PRO 
+	 1215  ARG 
+	 1216  LEU 
+	 1217  TYR 
+	 1218  THR 
+	 1219  ASP 
+	 1220  ARG 
+	 1222  ARG 
+chain 0 (A) interfaces 2 (C) through residues 
+	  568  PRO 
+	  569  LYS 
+	  667  GLY 
+	  668  ASP 
+	  738  LYS 
+	  740  LEU 
+	  742  ASN 
+chain 2 (C) interfaces 0 (A) through residues 
+	  192  TRP 
+	  193  TYR 
+	  194  GLU 
+	  195  GLN 
+	  221  TYR 
+	  222  LYS 
+chain 0 (A) interfaces 3 (E) through residues 
+	  120  GLU 
+	  129  LYS 
+	  155  GLU 
+	  156  ASP 
+	  157  ASP 
+	  857  ARG 
+	  860  LEU 
+	  861  GLY 
+	  862  ASN 
+	  863  VAL 
+	  865  GLN 
+	  866  PHE 
+	  867  ILE 
+	  869  GLY 
+	  870  GLU 
+	  871  ASP 
+	  942  PHE 
+	  946  VAL 
+	  947  PHE 
+	  954  TRP 
+	  956  LEU 
+	 1004  ASN 
+	 1006  ILE 
+	 1010  ALA 
+	 1013  ASP 
+	 1014  ALA 
+	 1016  THR 
+	 1017  LEU 
+	 1317  MET 
+	 1318  THR 
+	 1324  PRO 
+	 1325  THR 
+	 1326  ARG 
+	 1327  ILE 
+	 1337  GLU 
+	 1338  VAL 
+	 1339  LEU 
+	 1340  GLY 
+	 1341  ILE 
+	 1342  GLU 
+	 1343  ALA 
+	 1345  ARG 
+	 1349  TYR 
+	 1365  TYR 
+	 1376  THR 
+	 1377  THR 
+	 1378  GLN 
+	 1379  GLY 
+chain 3 (E) interfaces 0 (A) through residues 
+	   11  ARG 
+	   14  ARG 
+	   94  LYS 
+	  122  LYS 
+	  125  PRO 
+	  126  SER 
+	  141  VAL 
+	  142  VAL 
+	  144  ILE 
+	  146  HIS 
+	  147  HIS 
+	  148  GLU 
+	  149  LEU 
+	  150  VAL 
+	  151  PRO 
+	  153  HIS 
+	  163  GLU 
+	  164  LEU 
+	  167  ARG 
+	  168  TYR 
+	  170  LEU 
+	  173  SER 
+	  174  GLN 
+	  175  LEU 
+	  176  PRO 
+	  177  ARG 
+	  179  GLN 
+	  182  ASP 
+	  183  PRO 
+	  184  VAL 
+	  198  ILE 
+	  200  ARG 
+	  201  LYS 
+	  202  SER 
+	  203  GLU 
+	  204  THR 
+	  205  SER 
+	  206  GLY 
+	  207  ARG 
+	  208  TYR 
+	  210  SER 
+	  211  TYR 
+	  212  ARG 
+	  215  MET 
+chain 0 (A) interfaces 4 (F) through residues 
+	  379  VAL 
+	  380  VAL 
+	  381  THR 
+	  382  PRO 
+	  383  TYR 
+	  429  GLY 
+	  495  GLU 
+	  496  GLU 
+	  499  ALA 
+	  502  SER 
+	  503  GLN 
+	  504  LEU 
+	  851  HIS 
+	  852  TYR 
+	  853  ASP 
+	  857  ARG 
+	 1001  ARG 
+	 1002  GLY 
+	 1054  LEU 
+	 1055  ARG 
+	 1059  HIS 
+	 1060  PRO 
+	 1061  GLY 
+	 1062  GLU 
+	 1437  GLY 
+	 1438  THR 
+	 1441  PHE 
+	 1442  ASP 
+	 1443  VAL 
+	 1444  MET 
+	 1445  ILE 
+	 1446  ASP 
+	 1448  GLU 
+	 1449  SER 
+chain 4 (F) interfaces 0 (A) through residues 
+	   80  ALA 
+	   81  THR 
+	   83  PRO 
+	   84  TYR 
+	   86  THR 
+	   87  LYS 
+	   88  TYR 
+	   89  GLU 
+	   90  ARG 
+	   91  ALA 
+	   92  ARG 
+	   95  GLY 
+	   98  ALA 
+	   99  LEU 
+	  101  ILE 
+	  102  SER 
+	  104  ASN 
+	  107  VAL 
+	  111  LEU 
+	  115  THR 
+	  117  PRO 
+	  118  LEU 
+	  131  PRO 
+	  132  LEU 
+	  133  VAL 
+	  134  ILE 
+	  135  ARG 
+	  136  ARG 
+	  137  TYR 
+	  138  LEU 
+	  139  PRO 
+	  145  ASP 
+	  147  SER 
+	  149  GLU 
+	  154  ASP 
+	  155  LEU 
+chain 0 (A) interfaces 5 (H) through residues 
+	  537  ARG 
+	  538  ASP 
+	  540  PHE 
+	  558  GLY 
+	  559  VAL 
+	  560  ILE 
+	  562  THR 
+	  563  PRO 
+	  564  ALA 
+	  565  ILE 
+	  566  ILE 
+	  567  LYS 
+	  568  PRO 
+	  570  PRO 
+	  571  LEU 
+	  572  TRP 
+	  573  SER 
+	  575  LYS 
+	  576  GLN 
+	  597  LEU 
+	  598  LEU 
+	  600  PRO 
+	  602  ASP 
+	  606  LEU 
+	  613  ILE 
+	  614  PHE 
+	  738  LYS 
+	  739  ASP 
+	  740  LEU 
+	  974  ASP 
+	  975  HIS 
+	  976  THR 
+chain 5 (H) interfaces 0 (A) through residues 
+	   19  ARG 
+	   20  TYR 
+	   21  ASN 
+	   22  LYS 
+	   23  VAL 
+	   25  ARG 
+	   39  THR 
+	   41  ASP 
+	   43  ASN 
+	   46  LEU 
+	   78  SER 
+	   79  TRP 
+	   94  ASP 
+	   95  TYR 
+	   96  VAL 
+	   97  MET 
+	   98  TYR 
+	  102  TYR 
+	  104  PHE 
+	  115  TYR 
+	  117  SER 
+	  118  PHE 
+	  119  GLY 
+	  120  GLY 
+	  122  LEU 
+	  124  ARG 
+	  136  LYS 
+	  141  TYR 
+chain 0 (A) interfaces 6 (I) through residues 
+	  697  ALA 
+	  698  GLN 
+	  699  ALA 
+	  700  ASN 
+	  709  THR 
+	  710  LEU 
+	  711  ARG 
+	  714  PHE 
+	  781  ASP 
+	  782  ARG 
+	  788  SER 
+	  789  LYS 
+	  790  ASP 
+	  792  TYR 
+	 1147  THR 
+	 1148  ILE 
+	 1149  ALA 
+	 1150  SER 
+	 1151  GLU 
+	 1152  ILE 
+	 1153  TYR 
+	 1154  TYR 
+	 1156  PRO 
+	 1162  VAL 
+	 1190  PRO 
+	 1191  TRP 
+	 1261  LYS 
+	 1264  GLU 
+	 1268  LEU 
+chain 6 (I) interfaces 0 (A) through residues 
+	   18  GLU 
+	   23  ASN 
+	   24  ARG 
+	   25  LEU 
+	   41  PRO 
+	   42  LEU 
+	   43  VAL 
+	   44  TYR 
+	   45  ARG 
+	   46  HIS 
+	   47  GLU 
+	   48  LEU 
+	   49  ILE 
+	   67  THR 
+	   68  LEU 
+	   69  PRO 
+	   86  PHE 
+	   87  GLN 
+	   91  ARG 
+	   93  LYS 
+	   94  ASP 
+	   95  THR 
+	   96  SER 
+	   97  MET 
+	   98  VAL 
+	   99  LEU 
+	  112  SER 
+	  113  ASP 
+	  114  GLN 
+	  115  LYS 
+chain 0 (A) interfaces 7 (J) through residues 
+chain 7 (J) interfaces 0 (A) through residues 
+chain 0 (A) interfaces 8 (K) through residues 
+	  356  ASP 
+	  358  ASN 
+	  367  PRO 
+	  368  LYS 
+	  369  SER 
+	  464  PRO 
+	  465  TYR 
+	  466  SER 
+	  469  ARG 
+	  544  ASP 
+	  547  LEU 
+	  548  ASN 
+	  551  TYR 
+	  552  TRP 
+	  556  TRP 
+	  557  ASP 
+	  558  GLY 
+	  560  ILE 
+chain 8 (K) interfaces 0 (A) through residues 
+	    1  MET 
+	    2  ASN 
+	    3  ALA 
+	    4  PRO 
+	   26  LYS 
+	   32  VAL 
+	   47  ARG 
+	   51  LEU 
+	   57  LEU 
+	   58  PHE 
+	   59  ALA 
+	   60  ALA 
+	   61  TYR 
+	   62  LYS 
+	   63  VAL 
+	   64  GLU 
+	   65  HIS 
+	   66  PRO 
+	   67  PHE 
+	   72  LYS 
+	   74  ARG 
+chain 0 (A) interfaces 9 (L) through residues 
+chain 9 (L) interfaces 0 (A) through residues 
+chain 1 (B) interfaces 2 (C) through residues 
+	  797  TYR 
+	  798  TYR 
+	  844  SER 
+	  847  ASP 
+	  848  ARG 
+	  849  GLY 
+	  852  ARG 
+	  969  ARG 
+	  971  THR 
+	  995  ARG 
+	  996  ARG 
+	  997  GLU 
+	  998  ASP 
+	 1001  PHE 
+	 1003  ALA 
+	 1004  GLU 
+	 1005  GLY 
+	 1060  ARG 
+	 1063  GLY 
+	 1064  TYR 
+	 1065  GLN 
+	 1067  ARG 
+	 1069  PHE 
+	 1071  VAL 
+	 1073  TYR 
+	 1075  GLY 
+	 1076  HIS 
+	 1077  THR 
+	 1078  GLY 
+	 1079  LYS 
+	 1080  LYS 
+	 1081  LEU 
+	 1082  MET 
+	 1084  GLN 
+chain 2 (C) interfaces 1 (B) through residues 
+	   27  LEU 
+	   31  ASN 
+	   34  ARG 
+	   35  ARG 
+	   38  ILE 
+	   39  ALA 
+	   59  ALA 
+	   61  GLU 
+	   62  PHE 
+	   65  HIS 
+	   66  ARG 
+	  165  LYS 
+	  167  HIS 
+	  168  ALA 
+	  173  ALA 
+	  174  ALA 
+	  175  ALA 
+	  176  ILE 
+	  177  GLU 
+	  178  PHE 
+	  179  GLU 
+	  180  TYR 
+	  181  ASP 
+	  188  HIS 
+	  189  THR 
+	  190  ASP 
+	  191  TYR 
+	  192  TRP 
+	  194  GLU 
+	  199  LYS 
+	  201  TRP 
+	  202  PRO 
+chain 1 (B) interfaces 3 (E) through residues 
+	 1222  ARG 
+chain 3 (E) interfaces 1 (B) through residues 
+	  171  LYS 
+chain 1 (B) interfaces 4 (F) through residues 
+	 1141  HIS 
+	 1142  GLY 
+chain 4 (F) interfaces 1 (B) through residues 
+	   88  TYR 
+chain 1 (B) interfaces 5 (H) through residues 
+chain 5 (H) interfaces 1 (B) through residues 
+chain 1 (B) interfaces 6 (I) through residues 
+	  293  PRO 
+	  294  ASP 
+	  295  GLY 
+	  296  GLU 
+	  298  LEU 
+	  307  ASP 
+	  308  TRP 
+	  309  GLN 
+	  311  LEU 
+	  312  GLU 
+	  315  LYS 
+	  318  VAL 
+	  322  PHE 
+	  325  GLN 
+	  391  ASP 
+	  392  ARG 
+	  393  LYS 
+	  394  ASP 
+	  594  ALA 
+	  617  ARG 
+	  619  ILE 
+	  620  ARG 
+	  699  GLU 
+	  700  SER 
+	  701  ILE 
+	  702  LEU 
+	  737  THR 
+	  739  THR 
+chain 6 (I) interfaces 1 (B) through residues 
+	    1  MET 
+	    4  PHE 
+	    6  PHE 
+	   10  CYS 
+	   11  ASN 
+	   12  ASN 
+	   13  MET 
+	   15  TYR 
+	   30  ARG 
+	   44  TYR 
+	   45  ARG 
+	   47  GLU 
+	   50  THR 
+	   52  ILE 
+	   57  GLY 
+	   59  VAL 
+	   61  ASP 
+	   62  ILE 
+	   64  SER 
+	   65  ASP 
+	   66  PRO 
+	   67  THR 
+	   68  LEU 
+	   86  PHE 
+	   89  GLN 
+	   91  ARG 
+	   92  ARG 
+chain 1 (B) interfaces 7 (J) through residues 
+	  186  GLU 
+	  190  TYR 
+	  193  LYS 
+	  195  CYS 
+	  196  PRO 
+	  780  VAL 
+	  783  THR 
+	  784  ASN 
+	  785  TYR 
+	  796  LEU 
+	  797  TYR 
+	  798  TYR 
+	  799  PRO 
+	  800  GLN 
+	  801  LYS 
+	  803  LEU 
+	  815  ARG 
+	  816  GLU 
+	  821  GLN 
+	  822  ASN 
+	  824  ILE 
+	  845  SER 
+	  848  ARG 
+	  849  GLY 
+	  850  LEU 
+	  996  ARG 
+	 1006  ILE 
+	 1009  ASP 
+	 1033  LYS 
+	 1035  ALA 
+	 1036  ALA 
+	 1037  LEU 
+	 1038  SER 
+	 1039  GLY 
+	 1064  TYR 
+	 1070  GLU 
+	 1087  PHE 
+chain 7 (J) interfaces 1 (B) through residues 
+	    1  MET 
+	    2  ILE 
+	    4  PRO 
+	    7  CYS 
+	    8  PHE 
+	    9  SER 
+	   10  CYS 
+	   11  GLY 
+	   32  GLU 
+	   33  GLY 
+	   43  ARG 
+	   44  TYR 
+	   47  ARG 
+	   48  ARG 
+	   51  LEU 
+	   52  THR 
+	   54  VAL 
+	   56  LEU 
+	   59  LYS 
+	   60  PHE 
+	   62  ARG 
+	   63  TYR 
+	   65  PRO 
+chain 1 (B) interfaces 8 (K) through residues 
+	  833  TYR 
+	  843  GLN 
+	  847  ASP 
+	  976  ILE 
+	  992  ILE 
+	  995  ARG 
+	  998  ASP 
+	 1076  HIS 
+	 1100  ASP 
+chain 8 (K) interfaces 1 (B) through residues 
+	    1  MET 
+	    6  ARG 
+	    9  LEU 
+	   40  HIS 
+	   65  HIS 
+	   66  PRO 
+	   67  PHE 
+chain 1 (B) interfaces 9 (L) through residues 
+	  104  GLU 
+	  106  ASP 
+	  110  HIS 
+	  120  ARG 
+	  193  LYS 
+	  852  ARG 
+	  875  GLU 
+	  894  ASP 
+	  896  ASP 
+	  898  LEU 
+	  899  ILE 
+	  900  ALA 
+	  901  PRO 
+	  902  GLY 
+	  903  VAL 
+	  904  ARG 
+	  948  ILE 
+	  952  VAL 
+	  953  LEU 
+	  954  VAL 
+	  955  THR 
+	  956  THR 
+chain 9 (L) interfaces 1 (B) through residues 
+	   29  TYR 
+	   32  ALA 
+	   42  ARG 
+	   46  VAL 
+	   47  ARG 
+	   54  ARG 
+	   55  ILE 
+	   56  LEU 
+	   57  LEU 
+	   58  LYS 
+	   59  ALA 
+	   60  ARG 
+	   61  THR 
+	   65  VAL 
+	   66  GLN 
+	   67  PHE 
+	   68  GLU 
+	   70  ARG 
+chain 2 (C) interfaces 3 (E) through residues 
+chain 3 (E) interfaces 2 (C) through residues 
+chain 2 (C) interfaces 4 (F) through residues 
+chain 4 (F) interfaces 2 (C) through residues 
+chain 2 (C) interfaces 5 (H) through residues 
+	  187  LYS 
+	  219  PHE 
+	  221  TYR 
+chain 5 (H) interfaces 2 (C) through residues 
+	   45  GLU 
+	   46  LEU 
+chain 2 (C) interfaces 6 (I) through residues 
+chain 6 (I) interfaces 2 (C) through residues 
+chain 2 (C) interfaces 7 (J) through residues 
+	   57  VAL 
+	   58  LEU 
+	   62  PHE 
+	   66  ARG 
+	   69  LEU 
+	   71  PRO 
+	  110  THR 
+	  112  ASN 
+	  114  TYR 
+	  136  ASP 
+	  137  LYS 
+	  141  GLY 
+	  142  VAL 
+	  143  LEU 
+	  145  CYS 
+	  146  LYS 
+	  148  ARG 
+	  151  GLN 
+	  169  LYS 
+	  173  ALA 
+	  174  ALA 
+	  175  ALA 
+	  177  GLU 
+	  233  GLU 
+	  235  VAL 
+chain 7 (J) interfaces 2 (C) through residues 
+	    1  MET 
+	    2  ILE 
+	    3  VAL 
+	    4  PRO 
+	    5  VAL 
+	    6  ARG 
+	   10  CYS 
+	   12  LYS 
+	   13  VAL 
+	   15  GLY 
+	   16  ASP 
+	   19  GLU 
+	   39  LEU 
+	   42  LYS 
+	   43  ARG 
+	   55  ASP 
+	   57  ILE 
+	   58  GLU 
+	   60  PHE 
+	   61  LEU 
+	   63  TYR 
+	   64  ASN 
+chain 2 (C) interfaces 8 (K) through residues 
+	    3  GLU 
+	    6  PRO 
+	    7  GLN 
+	    8  VAL 
+	   10  ILE 
+	   13  ALA 
+	   14  SER 
+	   18  VAL 
+	   22  LEU 
+	   26  ASP 
+	   28  ALA 
+	   29  MET 
+	   32  SER 
+	   33  LEU 
+	   35  ARG 
+	   36  VAL 
+	   84  ARG 
+	  165  LYS 
+	  166  GLU 
+	  167  HIS 
+	  241  ASP 
+	  244  VAL 
+	  245  VAL 
+	  248  ILE 
+	  249  ASP 
+	  251  LEU 
+	  252  GLN 
+	  254  LYS 
+	  255  VAL 
+	  258  ILE 
+	  259  LEU 
+	  261  ALA 
+	  262  LEU 
+	  265  MET 
+chain 8 (K) interfaces 2 (C) through residues 
+	    6  ARG 
+	    9  LEU 
+	   10  PHE 
+	   11  LEU 
+	   19  LEU 
+	   21  ILE 
+	   35  PHE 
+	   38  GLU 
+	   39  ASP 
+	   40  HIS 
+	   41  THR 
+	   42  LEU 
+	   44  ASN 
+	   45  LEU 
+	   48  ALA 
+	   49  GLU 
+	   52  ASN 
+	   87  LEU 
+	   88  LYS 
+	   91  CYS 
+	   92  ASN 
+	   95  ILE 
+	   97  LYS 
+	   98  LEU 
+	   99  GLY 
+	  101  LEU 
+	  102  LYS 
+	  103  THR 
+	  104  ASN 
+	  105  PHE 
+	  106  GLU 
+	  108  GLU 
+	  109  TRP 
+	  112  GLN 
+	  114  LEU 
+chain 2 (C) interfaces 9 (L) through residues 
+	   46  ILE 
+	   47  ASP 
+	   48  SER 
+	   49  VAL 
+	   50  GLU 
+	   51  VAL 
+	   52  GLU 
+	   53  THR 
+	   60  ASP 
+	   65  HIS 
+	  166  GLU 
+	  167  HIS 
+	  169  LYS 
+	  170  TRP 
+chain 9 (L) interfaces 2 (C) through residues 
+	   60  ARG 
+	   64  LEU 
+	   65  VAL 
+	   66  GLN 
+	   67  PHE 
+	   69  ALA 
+	   70  ARG 
+chain 3 (E) interfaces 4 (F) through residues 
+	  169  ARG 
+chain 4 (F) interfaces 3 (E) through residues 
+	  140  ASP 
+	  142  SER 
+chain 3 (E) interfaces 5 (H) through residues 
+chain 5 (H) interfaces 3 (E) through residues 
+chain 3 (E) interfaces 6 (I) through residues 
+chain 6 (I) interfaces 3 (E) through residues 
+chain 3 (E) interfaces 7 (J) through residues 
+chain 7 (J) interfaces 3 (E) through residues 
+chain 3 (E) interfaces 8 (K) through residues 
+chain 8 (K) interfaces 3 (E) through residues 
+chain 3 (E) interfaces 9 (L) through residues 
+chain 9 (L) interfaces 3 (E) through residues 
+chain 4 (F) interfaces 5 (H) through residues 
+chain 5 (H) interfaces 4 (F) through residues 
+chain 4 (F) interfaces 6 (I) through residues 
+chain 6 (I) interfaces 4 (F) through residues 
+chain 4 (F) interfaces 7 (J) through residues 
+chain 7 (J) interfaces 4 (F) through residues 
+chain 4 (F) interfaces 8 (K) through residues 
+chain 8 (K) interfaces 4 (F) through residues 
+chain 4 (F) interfaces 9 (L) through residues 
+chain 9 (L) interfaces 4 (F) through residues 
+chain 5 (H) interfaces 6 (I) through residues 
+chain 6 (I) interfaces 5 (H) through residues 
+chain 5 (H) interfaces 7 (J) through residues 
+chain 7 (J) interfaces 5 (H) through residues 
+chain 5 (H) interfaces 8 (K) through residues 
+	   80  ARG 
+	   82  PRO 
+chain 8 (K) interfaces 5 (H) through residues 
+	   54  ARG 
+	   57  LEU 
+	   78  THR 
+chain 5 (H) interfaces 9 (L) through residues 
+chain 9 (L) interfaces 5 (H) through residues 
+chain 6 (I) interfaces 7 (J) through residues 
+chain 7 (J) interfaces 6 (I) through residues 
+chain 6 (I) interfaces 8 (K) through residues 
+chain 8 (K) interfaces 6 (I) through residues 
+chain 6 (I) interfaces 9 (L) through residues 
+chain 9 (L) interfaces 6 (I) through residues 
+chain 7 (J) interfaces 8 (K) through residues 
+chain 8 (K) interfaces 7 (J) through residues 
+chain 7 (J) interfaces 9 (L) through residues 
+chain 9 (L) interfaces 7 (J) through residues 
+chain 8 (K) interfaces 9 (L) through residues 
+chain 9 (L) interfaces 8 (K) through residues 

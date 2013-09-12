@@ -1,0 +1,5 @@
+align  1cktA.msf
+query query_1cktA
+special query_1cktA
+pdbf query_1cktA.pdb
+sink 0.3

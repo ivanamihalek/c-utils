@@ -1,0 +1,5 @@
+align  1avqA.msf
+query query_1avqA
+special query_1avqA
+pdbf query_1avqA.pdb
+sink 0.3

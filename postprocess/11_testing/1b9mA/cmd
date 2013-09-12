@@ -1,0 +1,5 @@
+align  1b9mA.msf
+query query_1b9mA
+special query_1b9mA
+pdbf query_1b9mA.pdb
+sink 0.3

@@ -1,0 +1,29 @@
+  BRANCUSI version 1.0.
+  by Ivana Mihalek, 2005
+
+Usage: brancusi <command file>.
+
+<command file> should have one or more of the
+	following options, one per line:
+
+
+	alignment  <alignment file>
+	chain      <chain id from PDB>
+	inscore   <input score file>
+	method     <entropy|ivET|rvET>
+	outname    <output name>    
+	pdbfile    <pdb file>
+	query      <query name in the alignment file>
+	sink       <max fraction of gaps in the column>
+
+
+
+
+
+
+Example <command file>:
+	pdbfile  1hlm/1hlm.trunc.pdb
+	align 1hlm/mc.struct.msf
+	query  1hlm
+	outname blah
+	method rvET

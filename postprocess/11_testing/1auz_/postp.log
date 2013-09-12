@@ -1,0 +1,16 @@
+
+  POSTP version 1.0.
+  by Ivana Mihalek, 2005
+  File produced on Thu Mar  2 14:52:00 2006
+
+  Options:
+  	 pdb file:               query_1auz_.pdb
+  	 alignment  file:        1auz_.msf
+  	 query  name:            query_1auz_
+  	 max fraction of gaps:   0.30
+  	 residue scoring method:  entropy
+  Warning:
+  	 No chain specified. Using the first one.
+  Notes:
+  	 Remember that the results will depend on the input sequence selection,
+  	 as well as the alignment quality and proportion of gaps in the alignment.

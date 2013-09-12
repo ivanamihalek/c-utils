@@ -1,0 +1,9 @@
+usage (on a linux machine, at least):
+
+gcc -o lin linplot.c -lm
+lin2matrix.pl etc_out.linear_pattern >! matrix.dat
+lin matrix.dat
+     --- produces matrix.ppm
+ppmtogif matrix.ppm >! matrix.gif
+     ---  ppmtogif is a part of linux distribution
+ xview matrix.gif

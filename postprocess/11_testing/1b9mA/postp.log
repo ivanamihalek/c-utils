@@ -1,0 +1,13 @@
+
+  POSTP version 1.0.
+  by Ivana Mihalek, 2005
+  File produced on Tue Feb 28 16:27:02 2006
+
+  Options:
+  	 pdb file:               query_1b9mA.pdb
+  	 alignment  file:        1b9mA.msf
+  	 query  name:            query_1b9mA
+  	 max fraction of gaps:   0.30
+  	 residue scoring method:  entropy
+  Warning:
+  	 No chain specified. Using the first one.

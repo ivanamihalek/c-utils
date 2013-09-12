@@ -1,0 +1,12 @@
+to compile:
+cd bin
+make
+
+to run:
+cd ../example
+../smallig mx1.fitter.pdb ndm1.ligand.pdb
+
+note: the output, which is the rotated first pdb file,
+goes to stdout, so you might chose to do something like
+../smallig mx1.fitter.pdb ndm1.ligand.pdb > mx1.rotated.pdb
+
