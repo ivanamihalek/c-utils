@@ -50,11 +50,11 @@ int main (int argc, char * argv[]) {
     /* read in the two structures                */
     if ( read_pdb ( pdbname1, &protein1, '\0'))  exit (1);
     if ( read_pdb ( pdbname2, &protein2, '\0'))  exit (1);
-    printf ("read in %s, length %d\n", pdbname1, protein1.length);
-    printf ("read in %s, length %d\n", pdbname2, protein2.length);
+    //printf ("read in %s, length %d\n", pdbname1, protein1.length);
+    //printf ("read in %s, length %d\n", pdbname2, protein2.length);
     /* read in the list of residues to be matched in protein 2 */
     read_list ( list_fname, &list, &list_length);
-    printf ("list length %d\n", list_length);
+    //printf ("list length %d\n", list_length);
 
     /**********************************************/
     /* allocate space for the "similarity" matrix */
@@ -115,14 +115,14 @@ int main (int argc, char * argv[]) {
     /* find the maps using SW                            */
     smith_waterman (protein1.length, protein2.length, similarity,
 		    residue_map_i2j, residue_map_j2i, &aln_score);
-    printf ("alignment score: %8.3lf\n", aln_score);
+    //printf ("alignment score: %8.3lf\n", aln_score);
 
     /* find the quaternion for the tfm  minimizing the rmsd */
     if ( ! (q=emalloc (4*sizeof(double))) ) return 1;
     if ( ! (T=emalloc (3*sizeof(double))) ) return 1;
     if ( ! (R=dmatrix (3,3) ) ) return 1;
     map2rotation (&protein1, &protein2, residue_map_i2j, q, T, &rmsd);
-    printf ("rmsd: %8.4lf\n\n", rmsd);
+    //printf ("rmsd: %8.4lf\n\n", rmsd);
     
 
     /* translate quaternion into tfm matrix */

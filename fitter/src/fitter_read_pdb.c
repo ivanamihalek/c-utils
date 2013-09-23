@@ -25,7 +25,7 @@ int read_pdb ( char * pdbname, Protein * protein, char chain) {
     while(fgets(line, BUFFLEN, fptr)!=NULL){
 	if ( chain && line[PDB_ATOM_CHAINID] != chain ) continue;
 	if ( ! strncmp(line,"TER", 3) ||  ! strncmp(line,"END", 3) ) break;
-	if( ! strncmp(line,"ATOM", 4) ||  ! strncmp(line,"HETATM", 6)){
+	if ( ! strncmp(line,"ATOM", 4) ||  ! strncmp(line,"HETATM", 6)){
 	    if (  strncmp (line+PDB_ATOM_RES_NO, oldresno,  PDB_ATOM_RES_NO_LEN+1) ) {
 		
 		strncpy (oldresno, line+PDB_ATOM_RES_NO, PDB_ATOM_RES_NO_LEN+1);
@@ -54,9 +54,7 @@ int read_pdb ( char * pdbname, Protein * protein, char chain) {
 	if ( chain && line[PDB_ATOM_CHAINID] != chain ) continue;
 	if ( ! strncmp(line,"TER", 3) ||  ! strncmp(line,"END", 3) ) break;
 	if( ! strncmp(line,"ATOM", 4)  ||  ! strncmp(line,"HETATM", 6)){
-	   /* if it's a hydrogen - skip */
-	    if ( line[PDB_ATOM_ATOM_NAME] == 'H'
-		 ||  line[PDB_ATOM_ATOM_NAME+1] == 'H') continue;
+
 	    /* adjust the counters */ 
 	    if (  strncmp (line+PDB_ATOM_RES_NO, oldresno,  PDB_ATOM_RES_NO_LEN+1) ) {
 		strncpy (oldresno, line+PDB_ATOM_RES_NO, PDB_ATOM_RES_NO_LEN+1);
@@ -72,8 +70,10 @@ int read_pdb ( char * pdbname, Protein * protein, char chain) {
 		
 		strncpy ( sequence[resctr].res_type, oldrestype, PDB_ATOM_RES_NAME_LEN+1);
 		sequence[resctr].res_type[PDB_ATOM_RES_NAME_LEN] = '\0';
-		sequence[resctr].res_type_short  = single_letter ( sequence[resctr].res_type );
-		if ( !sequence[resctr].res_type_short ) return 1;
+		/* we do not need the single-letter code here; actually, what is in the pdb file
+		   is non of our business */
+		/*sequence[resctr].res_type_short  = single_letter ( sequence[resctr].res_type ); */
+		/* if ( !sequence[resctr].res_type_short ) return 1; */
 	   
 	    } else {
 		atomctr ++;
@@ -90,10 +90,10 @@ int read_pdb ( char * pdbname, Protein * protein, char chain) {
 	    memset ( tmp, 0, PDB_ATOM_ATOM_NAME_LEN+1);
 	    /* skip initial blanks*/
 	    ctr  = 0;
-	    while ( !(isalpha (*(auxptr + ctr))) &&  (ctr <= PDB_ATOM_ATOM_NAME_LEN) ) ctr++;
+	    while ( !(isalnum (*(auxptr + ctr))) &&  (ctr <= PDB_ATOM_ATOM_NAME_LEN) ) ctr++;
 	    /* copy alphanum info */
 	    nonblank = 0;
-	    while (  isalpha (*(auxptr +ctr))  &&  (ctr <= PDB_ATOM_ATOM_NAME_LEN) ) {
+	    while (  isalnum (*(auxptr +ctr))  &&  (ctr <= PDB_ATOM_ATOM_NAME_LEN) ) {
 		tmp[nonblank] =  *(auxptr +ctr);
 		nonblank ++;
 		ctr++;

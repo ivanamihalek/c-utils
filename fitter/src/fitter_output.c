@@ -58,7 +58,7 @@ int pdb_output ( char *pdb_fnm_1, char *pdb_fnm_2, char * out_fnm, double  **tfm
 	    } else {
 		sprintf (atomtype, "%s", "ATOM");
 	    }
-	    fprintf (fptr,  "%-6s%5d  %-3s%1s%-3s %1c%4s%1s   %8.3lf%8.3lf%8.3lf\n", 
+	    fprintf (fptr,  "%-6s%5d %-4s%1s%-3s %1c%4s%1s   %8.3lf%8.3lf%8.3lf\n", 
 		     atomtype,  serial ,  atomptr->type,   " ",   sequence[resctr].res_type,
 		     sequence[resctr].chain, sequence[resctr].pdb_id,   " " ,
 		     new_atomptr->x,  new_atomptr->y,   new_atomptr->z);
