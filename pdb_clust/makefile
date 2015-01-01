@@ -24,7 +24,7 @@ ifeq (${PLATFORM},Linux)
 endif
 
 DEFINES =  $(PD)  -DVERBOSE 
-SOURCES.c =  main.c  read_pdb.c utils.c dist_matrix.c clustercounter.c 
+SOURCES.c =  main.c  cluster_scoring.c read_pdb.c read_residue_selection.c utils.c dist_matrix.c clustercounter.c 
 
 
 

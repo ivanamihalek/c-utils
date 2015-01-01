@@ -5,10 +5,6 @@
 
 #include <sys/types.h>
 
-void error (int errno, char *errstr) {
-    fprintf (stderr, errstr);
-    exit (errno);
-}
 
 void usage(char *  use[])
 {
@@ -28,7 +24,7 @@ void * emalloc(size_t	size)
 {
     void * ptr;
     if ((ptr = calloc(size, 1)) == NULL) {
-	fprintf (stderr,  "emalloc: no memory for %u bytes", size);
+	fprintf (stderr,  "emalloc: no memory for %d bytes", (int)size);
 	exit (1);
     }
 
@@ -219,6 +215,24 @@ int array_qsort (int * sorted_pos, double * sa, int sequence_length ) {
     score_array = sa;
 
     qsort (sorted_pos+1, sequence_length, sizeof(int), pos_cmp);
+
+    return 0;
+}
+
+
+/**********************************************************/
+/* get rid of spaces in a string */
+int  string_clean ( char* string, int length) {
+    int ctr;
+    for (ctr = 0; ctr < length; ctr ++) {
+	if ( isspace (string[ctr]) ) string[ctr] = '\0';
+    }
+    ctr=0;
+    while ( !string[ctr]) ctr++;
+    if ( ctr ) {
+	memmove (string, string+ctr, length-ctr);
+	memset ( string+length-1-ctr, 0, ctr);
+    }
 
     return 0;
 }
