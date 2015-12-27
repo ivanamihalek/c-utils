@@ -15,7 +15,6 @@ int read_pdb ( char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int 
     char tmp[PDB_ATOM_X_LEN+1];
     int atomctr, resctr, no_res, skip;
     char chain_id = *chain_id_ptr;
-    char single_letter ( char code[]);
     
     /* open file */
     fptr = fopen ( pdbname, "r");
@@ -35,6 +34,7 @@ int read_pdb ( char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int 
 	    }
 	}
     }
+
     /* count residues */
     memset (line,  0, BUFFLEN);
     memset (oldresno, 0, PDB_ATOM_RES_NO_LEN+1);
@@ -58,14 +58,16 @@ int read_pdb ( char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int 
     
     no_res = resctr;
     *no_res_ptr = no_res;
-    printf ("reading chain %c   no residues: %d\n", chain_id, no_res);
+    /* printf ("reading chain %c   no residues: %d\n", chain_id, no_res); */
+    
     
     /* allocate space */
     sequence = NULL;
-    sequence = emalloc ( no_res*sizeof (Residue));
-    if ( ! sequence ) return 1;
-
-    
+    sequence = calloc ( no_res, sizeof (Residue));
+    if ( ! sequence ) {
+	fprintf ( stderr, "Error allocating sequence space.\n");
+	exit (1);
+    }
     *sequence_ptr = sequence;
 
     /* read in the atoms */
@@ -104,13 +106,6 @@ int read_pdb ( char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int 
 		sequence[resctr].pdb_id[PDB_ATOM_RES_NO_LEN] = '\0';
 		strncpy ( sequence[resctr].res_type,oldrestype, PDB_ATOM_RES_NAME_LEN);
 		sequence[resctr].res_type[PDB_ATOM_RES_NAME_LEN] = '\0';
-
-		sequence[resctr].res_type_short  = single_letter ( sequence[resctr].res_type );
-		if ( !sequence[resctr].res_type_short ) {
-		    fprintf (stderr, "Error parsing residue type: %d, %s\n", resctr,  sequence[resctr].res_type );
-		    return 1;
-		}
-
 	   
 	    } else {
 		atomctr ++;
@@ -122,7 +117,8 @@ int read_pdb ( char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int 
 		}
 	    }
 	    /* read in atom info */
-	    strncpy ( sequence[resctr].atom[atomctr].type, line + PDB_ATOM_ATOM_NAME,  PDB_ATOM_ATOM_NAME_LEN );
+	    strncpy ( sequence[resctr].atom[atomctr].type, line+ PDB_ATOM_ATOM_NAME,
+		      PDB_ATOM_ATOM_NAME_LEN );
 	    sequence[resctr].atom[atomctr].type[ PDB_ATOM_ATOM_NAME_LEN] = '\0';
 	    strncpy ( tmp, line+PDB_ATOM_X , PDB_ATOM_X_LEN);
 	    tmp[PDB_ATOM_X_LEN] = '\0';
@@ -142,126 +138,23 @@ int read_pdb ( char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int 
 	}
 	
     }
+   /* clean PDB id tags from spaces */
+    for (resctr=0; resctr < no_res; resctr ++ ) {
+	if ( string_clean (sequence[resctr].pdb_id, PDB_ATOM_RES_NO_LEN+1)) {
+	    fprintf (stderr, "Error in read_pdb(): empty id string for residue with sequential no %d.\n", resctr);
+	    return 1;
+	}
+	if ( string_clean (sequence[resctr].res_type, PDB_ATOM_RES_NAME_LEN)) {
+	    fprintf (stderr, "Error in read_pdb(): empty id string for residue with sequential no %d.\n", resctr);
+	    return 1;
+	}
+	
+	sequence[resctr].res_type_short  = single_letter ( sequence[resctr].res_type );
+    }
+
 
     /* close file */
     fclose (fptr);
-
-    /* clean PDB id tags from spaces */
-    for (resctr=0; resctr < no_res; resctr ++ ) {
-	string_clean (sequence[resctr].pdb_id, PDB_ATOM_RES_NO_LEN+1);
-    }
-
-    
-    return 0;
-}
-
-
-
-char single_letter ( char code[]){
-
-    switch ( code[0] ) {
-    case 'A':
-	switch ( code [1]) {
-	case 'L':
-	    return 'A';
-	    break;
-	case 'R':
-	    return 'R';
-	    break;
-	case 'S':
-	    switch ( code[2] ) {
-	    case 'N':
-		return 'N';
-		break;
-	    case 'P':
-		return  'D';
-		break;
-	    }
-	    break;
-	}
-	break;
-    case 'C':
-	return 'C'; 
-	break;
-    case 'G':
-	/* the second letter is always L */ 
-	switch ( code[2] ) {
-	case 'U':
-	    return 'E';
-	    break;
-	case 'N':
-	    return  'Q';
-	    break;
-	case 'Y':
-	    return 'G';
-	    break;
-	}
-	break;
-    case 'H':
-	return  'H';
-	break;
-    case 'I':
-	return  'I';
-	break;
-    case 'L':
-	switch ( code [1]) {
-	case 'E':
-	    return 'L';
-	    break;
-	case 'Y':
-	    return 'K';
-	    break;
-	}
-	break;
-    case 'M':
-	return 'M';
-	break;
-    case 'P':
-	switch ( code [1]) {
-	case 'H':
-	    return 'F';
-	    break;
-	case 'R':
-	    return 'P';
-	    break;
-	case 'T':
-	    return 'Y'; //PTR phosphotyrosine
-	    break;
-	}
-	break;
-    case 'S':
-	switch ( code [1]) {
-	case 'E':
-	    return 'S';
-	    break;
-	case 'C':
-	    return 'C'; // SCY, selenocysteine
-	    break;
-	}
-    case 'T':
-	switch ( code [1]) {
-	case 'H':
-	    return 'T';
-	    break;
-	case 'R':
-	    return 'W';
-	    break;
-	case 'Y':
-	    return 'Y';
-	    break;
-	case 'P':
-	    return 'T'; // TPO phosphothreonine
-	    break;
-	}
-	break;
-    case 'V':
-	return 'V';
-	break;
-	
-    }
-
-
-    fprintf (stdout, "Unrecognized amino acid code: %s.\n", code);
     return 0;
 }
 

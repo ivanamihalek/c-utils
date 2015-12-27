@@ -38,15 +38,12 @@ typedef struct {
 extern char *amino_acid_order;
 # define AA_ORDER_LENGTH 21
 
+int read_pdb ( char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int * no_res_ptr);
+
+int read_selection (Residue *sequence, int no_res, char * filename, int * selection);
+int determine_dist_matrix ( double ** dist_matrix, Residue * sequence, int no_res);
 
 void cluster_counter (int  no_of_things,  int *neighbors[], int * mask,
-		      int cluster_count_per_size[], int * no_of_clusters,
+		     int cluster_count_per_size[], int * no_of_clusters,
 		      int * max_size, int * secnd_max_size , int * clusters[]);
-int cluster_score (int no_of_res, int *seq, int ** adj_matrix,double *score);
-int determine_dist_matrix ( double ** dist_matrix, Residue * sequence, int no_res);
-int read_pdb (char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int * no_res_ptr);
-
-int read_residue_selection (char * selected_res_file, Residue * sequence, int no_res, int *selected);
-int std_dev_over_S (int L, int M, int ** adj_matrix, double *avg, double * std_dev, int first);
-
 # endif

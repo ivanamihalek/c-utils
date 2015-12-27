@@ -1,10 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <fcntl.h>
+#include "utils.h"
 
-#include <sys/types.h>
-
+void error (int errno, char *errstr) {
+    fprintf (stderr, "%s\n", errstr);
+    exit (errno);
+}
 
 void usage(char *  use[])
 {
@@ -24,7 +23,7 @@ void * emalloc(size_t	size)
 {
     void * ptr;
     if ((ptr = calloc(size, 1)) == NULL) {
-	fprintf (stderr,  "emalloc: no memory for %d bytes", (int)size);
+	fprintf (stderr,  "emalloc: no memory for %zu bytes", size);
 	exit (1);
     }
 
@@ -48,6 +47,8 @@ FILE * efopen(char * name, char * mode)
     return fp;
 
 }
+
+
 
 
 
@@ -220,6 +221,51 @@ int array_qsort (int * sorted_pos, double * sa, int sequence_length ) {
 }
 
 
+/***************************************************************************/
+int tokenize ( char token[MAX_TOK][MEDSTRING], int * max_token,
+	       char * line , char comment_char) {
+    /* assumes the tokens to be no bigger than MEDSTRING */ 
+    
+    char * chrptr, *last; 
+    int current_token, current_char = 0;
+    int reading;
+   
+    memset (token[0], 0, MAX_TOK*MEDSTRING*sizeof(char)); 
+    chrptr = line;
+    last   = chrptr + strlen (line);
+    current_token = -1;
+    current_char  =  0;
+    reading = 0;
+    while ( chrptr <= last) {
+	if ( *chrptr == comment_char ) break;
+	if ( *chrptr == '\n' ) break;
+	if ( *chrptr && ! isspace(*chrptr) ) {
+	    if ( ! reading ) {
+		reading = 1;
+		current_char = 0;
+		current_token++;
+		if ( current_token >= MAX_TOK ) {
+		    return TOK_TOOMNY; /* defined in possum_utils.h */
+		}
+	    }
+	    if ( current_char >= MEDSTRING ) {
+		return TOK_TOOLONG;
+	    }
+	    token[current_token][current_char] = *chrptr;
+	    current_char++;
+	} else {
+	    if ( reading ) {
+		reading = 0;
+	    }
+	}
+	chrptr++;
+    }
+    *max_token = current_token;
+
+    return 0;
+    
+}
+
 /**********************************************************/
 /* get rid of spaces in a string */
 int  string_clean ( char* string, int length) {
@@ -228,7 +274,10 @@ int  string_clean ( char* string, int length) {
 	if ( isspace (string[ctr]) ) string[ctr] = '\0';
     }
     ctr=0;
-    while ( !string[ctr]) ctr++;
+    while ( !string[ctr] && ctr < length) ctr++;
+    
+    if ( ctr == length ) return 1; /* empty string */
+    
     if ( ctr ) {
 	memmove (string, string+ctr, length-ctr);
 	memset ( string+length-1-ctr, 0, ctr);
@@ -236,3 +285,113 @@ int  string_clean ( char* string, int length) {
 
     return 0;
 }
+
+/**********************************/
+char single_letter ( char code[]){
+
+    switch ( code[0] ) {
+    case 'A':
+	switch ( code [1]) {
+	case 'L':
+	    return 'A';
+	    break;
+	case 'R':
+	    return 'R';
+	    break;
+	case 'S':
+	    switch ( code[2] ) {
+	    case 'N':
+		return 'N';
+		break;
+	    case 'P':
+		return  'D';
+		break;
+	    }
+	    break;
+	}
+	break;
+    case 'C':
+	return 'C'; 
+	break;
+    case 'G':
+	/* the second letter is always L */ 
+	switch ( code[2] ) {
+	case 'U':
+	    return 'E';
+	    break;
+	case 'N':
+	    return  'Q';
+	    break;
+	case 'Y':
+	    return 'G';
+	    break;
+	}
+	break;
+    case 'H':
+	return  'H';
+	break;
+    case 'I':
+	return  'I';
+	break;
+    case 'L':
+	switch ( code [1]) {
+	case 'E':
+	    return 'L';
+	    break;
+	case 'Y':
+	    return 'K';
+	    break;
+	}
+	break;
+    case 'M':
+	return 'M';
+	break;
+    case 'P':
+	switch ( code [1]) {
+	case 'H':
+	    return 'F';
+	    break;
+	case 'R':
+	    return 'P';
+	    break;
+	case 'T':
+	    return 'Y'; //PTR phosphotyrosine
+	    break;
+	}
+	break;
+    case 'S':
+	switch ( code [1]) {
+	case 'E':
+	    return 'S';
+	    break;
+	case 'C':
+	    return 'C'; // SCY, selenocysteine
+	    break;
+	}
+    case 'T':
+	switch ( code [1]) {
+	case 'H':
+	    return 'T';
+	    break;
+	case 'R':
+	    return 'W';
+	    break;
+	case 'Y':
+	    return 'Y';
+	    break;
+	case 'P':
+	    return 'T'; // TPO phosphothreonine
+	    break;
+	}
+	break;
+    case 'V':
+	return 'V';
+	break;
+	
+    }
+
+
+    fprintf (stdout, "Unrecognized amino acid code: %s.\n", code);
+    return 0;
+}
+

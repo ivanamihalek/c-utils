@@ -54,8 +54,8 @@ void cluster_counter (int  no_of_things,  int *neighbors[], int * mask,
 		if (  mask [other_thing] && neighbors[this_thing][other_thing]) {
 		    if (flag_ptr[this_thing]){
 			if (flag_ptr[other_thing]){ /*if both ptrs assigned*/
-				/*************************************************/
-				/* look at the flag values they are assigned to: */
+			   /*************************************************/
+			    /* look at the flag values they are assigned to: */
 			    if ( *flag_ptr[this_thing]  !=  *flag_ptr[other_thing] ) { 
 				/* i.e. do something only if they differ*/
 				this_value   = *flag_ptr[this_thing];
