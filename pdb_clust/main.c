@@ -14,7 +14,7 @@ int main ( int argc, char * argv[]) {
     Residue * sequence;
     int no_res, res_ctr;
     int * selected;
-    double cutoff_dist;
+    double cutoff_dist, score;
     double **distmat;
     int ** cluster;
     int c;
@@ -73,6 +73,7 @@ int main ( int argc, char * argv[]) {
 
 	cluster_counter (no_res,  neighbors,  selected, cluster_count, & no_of_clusters,
 			 &max_size, &secnd_max_size , cluster);
+	clustering_z_score ( no_res,  neighbors,  selected, &score);
    }
 
     
@@ -93,7 +94,7 @@ int main ( int argc, char * argv[]) {
 	}
 	
     }
-   
+    fprintf (fclust, "\nclustering  z-score:  %8.3f\n", score);
     return 0;
 
     

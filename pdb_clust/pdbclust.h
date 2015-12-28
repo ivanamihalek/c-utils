@@ -46,4 +46,6 @@ int determine_dist_matrix ( double ** dist_matrix, Residue * sequence, int no_re
 void cluster_counter (int  no_of_things,  int *neighbors[], int * mask,
 		     int cluster_count_per_size[], int * no_of_clusters,
 		      int * max_size, int * secnd_max_size , int * clusters[]);
+int clustering_z_score ( int no_res, int ** neighbors, int * selected,  double *clustering_score);
+
 # endif

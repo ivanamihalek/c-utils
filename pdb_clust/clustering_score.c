@@ -1,15 +1,15 @@
+#include "pdbclust.h"
 
+int clustering_z_score ( int no_res, int ** neighbors, int * selected,  double *clustering_score){
 
-int clustering_z_score (int * selected, int no_res, int ** neighbors,  double *clustering_score){
-
-    int ctr, pos;
+    int pos;
     int first, no_selected;
     double score, avg, std_dev, z;
     int cluster_score (int no_of_res, int *seq, int ** adj_matrix,double *score);
     int std_dev_over_S (int L, int M, int ** adj_matrix, double *avg, double * std_dev, int first);
 
     no_selected = 0;
-    for (ctr=0; ctr< no_res; ctr++) no_selected += selected[ctr];
+    for (pos=0; pos< no_res; pos++) no_selected += selected[pos];
     
     /* find  scpre */
     cluster_score (no_res, selected, neighbors, &score);
@@ -20,9 +20,6 @@ int clustering_z_score (int * selected, int no_res, int ** neighbors,  double *c
     z = (std_dev>1.e-5) ? (score - avg)/std_dev : 0.0;
     *clustering_score  = z;
     
-
-    free_matrix ((void **)adj_matrix);
-    free (selection);
     return 0;
 }
 
@@ -63,14 +60,14 @@ int std_dev_over_S (int no_res, int no_selected, int ** neighbors, double *avg, 
 	for (i=0; i<no_res-1; i++) {
 	    for (j=i+1; j<no_res; j++) {
 			
-		if ( adj_matrix[i][j]) {
+		if ( neighbors[i][j]) {
 			    
 		    bare_avg_thry +=  (j-i);
 			    
 		    for (k=0; k<no_res-1; k++) {
 			for (l=k+1; l<no_res; l++) {
 				    
-			    if  ( adj_matrix[k][l]) {
+			    if  ( neighbors[k][l]) {
 				n = (k==i) + (l==j) + (k==j) + (l==i);
 				subsum [2-n] += (j-i)*(l-k);
 			    }
