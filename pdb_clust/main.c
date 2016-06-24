@@ -99,9 +99,7 @@ int main ( int argc, char * argv[]) {
 	
     }
 
-    exit(1);
-
-    /* output */
+     /* output */
     fclust = stdout;
     for ( c=0; c <= no_res; c++) {
 	if ( ! cluster[c][0] ) {
