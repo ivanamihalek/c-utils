@@ -74,9 +74,32 @@ int main ( int argc, char * argv[]) {
 	cluster_counter (no_res,  neighbors,  selected, cluster_count, & no_of_clusters,
 			 &max_size, &secnd_max_size , cluster);
 	clustering_z_score ( no_res,  neighbors,  selected, &score);
-   }
 
-    
+	if (0) {
+  	    printf ("runnning simulation ...\n");
+	    int cluster_score (int no_of_res, int *seq, int ** adj_matrix,double *score);
+	    int i, n;
+	    int no_selected = 0;
+	    for (i=0; i<no_res; i++) no_selected += selected[i];
+	    cluster_score (no_res, selected, neighbors, &score);
+	    printf (" selected  %4d   original cluster score = %8.2e\n", no_selected, score);
+	    double frac = (double)no_selected/no_res;
+	    double score = 0;
+	    for (n=0; n<100; n++) { // number of reps
+		memset (selected, 0, no_res*sizeof(int));
+		for (i=0; i<no_res; i++) {
+		    if (drand48() < frac) selected[i] = 1;
+		}
+		cluster_score (no_res, selected, neighbors, &score);
+		no_selected = 0;
+		for (i=0; i<no_res; i++) no_selected += selected[i];
+		printf  (" selected  %4d    random score = %8.2e\n",  no_selected, score);
+	    }
+	}
+	
+    }
+
+    exit(1);
 
     /* output */
     fclust = stdout;
@@ -95,6 +118,9 @@ int main ( int argc, char * argv[]) {
 	
     }
     fprintf (fclust, "\nclustering  z-score:  %8.3f\n", score);
+
+ 
+    
     return 0;
 
     

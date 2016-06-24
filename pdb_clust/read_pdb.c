@@ -58,7 +58,7 @@ int read_pdb ( char * pdbname, char *chain_id_ptr, Residue ** sequence_ptr, int 
     
     no_res = resctr;
     *no_res_ptr = no_res;
-    /* printf ("reading chain %c   no residues: %d\n", chain_id, no_res); */
+    printf ("reading chain %c   no residues: %d\n", chain_id, no_res);
     
     
     /* allocate space */

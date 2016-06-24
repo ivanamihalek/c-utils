@@ -44,9 +44,9 @@ int read_selection (Residue *sequence, int no_res, char * filename, int * select
 	    break;
 	}
 	if ( max_token < 0 ) continue;
-	res_short = token[1][0];
+	res_short = token[0][0];
 	for (i=0; i<no_res; i++) {
-	    if (! strcmp(sequence[i].pdb_id, token[0]) ){
+	    if (! strcmp(sequence[i].pdb_id, token[1]) ){
 		/* check */
 		if ( res_short != sequence[i].res_type_short) {
 		    fprintf (stderr, "type mismatch: %s  %c  %c \n",
@@ -58,6 +58,9 @@ int read_selection (Residue *sequence, int no_res, char * filename, int * select
 	    }
 	}
     }
-
+    int no_selected = 0;
+    for (i=0; i<no_res; i++) no_selected += selection[i];
+    printf ("selected: %d\n", no_selected);
+    
     return 0;
 }
