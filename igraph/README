@@ -1,0 +1,9 @@
+given a default igraph installation in /usr/local/lib
+the pieces of code here are to be compiled with
+
+gcc -o outname inname.c -I/usr/local/include/igraph -ligraph
+
+this last assumes dynamic library linking, 
+for which the LD_LIBRARY_PATH has to be set to
+
+export LD_LIBRARY_PATH=$ LD_LIBRARY_PATH:/usr/local/lib
