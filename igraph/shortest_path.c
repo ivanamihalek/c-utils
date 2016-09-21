@@ -33,11 +33,11 @@ int main(int argc, char*argv[]) {
     // 2263 FGFBP3
     igraph_vs_t  vertex_to; 
     igraph_integer_t vertex_from;
-    vertex_from = atol(argv[1]);
+    vertex_from = atol(argv[2]);
     // in principle, unumber of "to" vertices is arbitrary,
     // but that is a piece of code I will write some other time
     //igraph_vs_vector_small(&vertex_to, 2263, 7049,  -1);
-    igraph_vs_vector_small(&vertex_to, atol(argv[2]),  -1);
+    igraph_vs_vector_small(&vertex_to, atol(argv[3]),  -1);
    
     igraph_t graph;
     /*The number of vertices in the graph. If smaller than the largest integer in
