@@ -19,8 +19,11 @@ int main(int argc, char*argv[]) {
     FILE * infile  =  efopen(argv[1], "r") ;
     FILE * outfile =  efopen(argv[2], "w") ;
     
-    igraph_read_graph_edgelist (&graph, infile,  zero, IGRAPH_UNDIRECTED);
-    fclose(infile);
+    //igraph_read_graph_edgelist (&graph, infile,  zero, IGRAPH_UNDIRECTED);
+    // for named vertices:
+    igraph_read_graph_ncol(&graph, infile, NULL, 1,
+			   IGRAPH_ADD_WEIGHTS_NO , IGRAPH_UNDIRECTED);
+     fclose(infile);
     // vertex selector - initialization
     //igraph_vs_t vs; //A vertex selector object.
     //igraph_vit_t vit;//an uninitialized vertex iterator object. 
