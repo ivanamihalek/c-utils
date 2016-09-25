@@ -28,19 +28,35 @@ int main(int argc, char*argv[]) {
     /*int igraph_independent_vertex_sets(const igraph_t *graph,
 				   igraph_vector_ptr_t *res,
 				   igraph_integer_t min_size,
-				   igraph_integer_t max_size);*/  
+				   igraph_integer_t max_size);
+      min_size:
+             Integer giving the minimum size of the sets to be returned.
+	     If negative or zero, no lower bound will be used.
 
+      max_size:
+	     Integer giving the maximum size of the sets to be returned.
+	     If negative or zero, no upper bound will be used.
+    */
+    igraph_vector_ptr_t  result;
+    long int n;
+    igraph_vector_ptr_init (&result, 0);
+    igraph_independent_vertex_sets(&graph, &result, 0, 0);
+    n = igraph_vector_ptr_size(&result);
+    printf("%ld independent sets found\n", (long)n);
+  
+#if 0
     igraph_matrix_t result;
     igraph_matrix_init(&result, zero, zero);
 
     igraph_shortest_paths (&graph, &result, igraph_vss_all(), igraph_vss_all(), IGRAPH_ALL);
     printf ("output ...\n");
     print_matrix(outfile, &result);
-    fclose(outfile);
 
     igraph_matrix_destroy(&result);
+#endif
+    
+    fclose(outfile);
     igraph_destroy(&graph);
-
     if (!IGRAPH_FINALLY_STACK_EMPTY) return 1;
   
     return 0;
