@@ -110,17 +110,21 @@ int main(int argc, char*argv[]) {
     igraph_get_all_shortest_paths (&graph, &result, &nrgeo,
 			    vertex_from,  vertex_to,
 			   IGRAPH_ALL);
+    igraph_integer_t number_of_paths = igraph_vector_ptr_size(&result);
+    if (number_of_paths==0) {
+	printf ("no paths found\n");
+	exit(0);
+    }
     // I'm not sure what's with all the idioutc formtats these
     // guys are defining; at any rate, turn vector_ptr to vs_vector
     // because that is what we need to find neighbors
     igraph_vs_t  vids; 
     vector_ptr2vs_vector (&vids, result);
-    igraph_integer_t path_length = igraph_vector_ptr_size(&result);
     // clean up the old junk
     igraph_vs_destroy(&vertex_to);
     igraph_vector_ptr_destroy(&result);
     // create new result vector
-    igraph_vector_ptr_init (&result, path_length);
+    igraph_vector_ptr_init (&result, number_of_paths);
     // finally find all nbrs on the path
     igraph_neighborhood (&graph, &result, vids,  order, IGRAPH_ALL);
     for (i=0; i<igraph_vector_ptr_size(&result); i++) {
