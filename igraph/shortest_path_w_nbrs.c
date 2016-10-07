@@ -92,7 +92,7 @@ int main(int argc, char*argv[]) {
     
     igraph_bool_t directed  = IGRAPH_UNDIRECTED;
     igraph_read_graph_edgelist (&graph, infile,  zero, directed);
-
+    fclose(infile);
     /* shortest path calculation: */
     /* http://igraph.org/c/doc/igraph-Structural.html#igraph_get_all_shortest_paths
        int igraph_get_all_shortest_paths(const igraph_t *graph,

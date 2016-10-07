@@ -61,7 +61,7 @@ int main(int argc, char*argv[]) {
     igraph_integer_t zero = 0;
     igraph_bool_t directed  = IGRAPH_UNDIRECTED;
     igraph_read_graph_edgelist (&graph, infile,  zero, directed);
-    close(infile);
+    fclose(infile);
     //printf ("done reading in the graph\n"); fflush(stdout);
     /* neighborhood calculation: */
     /* int igraph_neighborhood(const igraph_t *graph, igraph_vector_ptr_t *res,
