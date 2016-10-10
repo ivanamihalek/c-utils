@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>    //strlen
+#include<stdlib.h>    //strlen
+#include<sys/socket.h>
+#include<arpa/inet.h> //inet_addr
+#include<unistd.h>    //write
+#include<pthread.h> //for threading , link with lpthread
+
+// hardcoded
+
+// arguments parser
+
+// connection creator
+
+// graph reader
+
+//the thread function
+void *connection_handler(void *);
+
+int main ( int argc, char * argv[]) {
+    // arguments: path to graph
+
+    // create socket connection
+
+    // read in and reconstruct the graph
+
+    // main lopp acepting the connection and solving the task
+    while (1) {
+	int client_connection_id = accept(fd, NULL, NULL);
+	if (client_connection_id < 0)  continue; // accept error
+	pthread_t solver_thread;
+	/* int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
+                          void *(*start_routine) (void *), void *arg);
+	  The pthread_create() function starts a new thread in the calling
+          process.  The new thread starts execution by invoking
+          start_routine(); arg is passed as the sole argument of start_routine().
+	*/
+	// solver arg srtucture containts bot the client_connection_id, 
+	// and the pointer to the graph structure
+	int pthred_retval = pthread_create (&solver_thread, NULL,  connection_handler, &solver_arg);
+	if (pthred_retval<0) {
+	    perror("could not create thread");
+	    return 1;
+	}
+    }
+    return 0;
+}
