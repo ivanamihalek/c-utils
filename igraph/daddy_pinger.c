@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
  	perror ("error reading");
 	exit(-1);
     }
-    printf (" %s  \n", buf);
+    printf ("%s  \n", buf);
     
     close(fd);
     return 0;
