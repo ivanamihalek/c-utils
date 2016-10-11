@@ -2,8 +2,9 @@
 #define _igraph_daddy_h 
 
 #include<stdio.h>
-#include<string.h>    //strlen
-#include<stdlib.h>    //strlen
+#include <ctype.h>  // isspace
+#include<string.h>  //strlen, memcpy
+#include<stdlib.h>  
 #include<sys/socket.h>
 #include<sys/un.h>
 #include<arpa/inet.h> //inet_addr
@@ -12,6 +13,9 @@
 #include<sys/signal.h>
 #include<igraph.h>
 
+// input tokenizer array
+#define MAX_TOK 1010
+#define TOKENLENGTH 30
 
 // hardcoded
 extern char *SOCKET_PATH;
@@ -25,29 +29,31 @@ typedef struct {
     // graph pointer
     void * graph_ptr;
     //graph * graph_ptr;
-}  thread_handler_arg;
+} thread_handler_arg;
 
 typedef enum {NEIGHBORS, PATH} igraph_method;
 
 typedef struct {
     igraph_method ig_method;
     int order;
-    int * node_list;
-    int node_list_length; 
-} igraph_args;
-
+    long int * node_list;
+    int node_list_length;
+    void * graph_ptr;
+} igraph_arg;
 
 // utility functions
 FILE * efopen(char * name, char * mode);
 void * emalloc(int size);
 void increase_buf_size (char ** buffer, char ** current_write_pos);
-
+int tokenize (char token[MAX_TOK][TOKENLENGTH], int * max_token,
+	       char * line , char comment_char);
 // threading related functions
 int  create_socket_connection();
 void *thread_handler(void *inptr);
 
 // igraph-related functions
-void construct_graph(char *filename, igraph_t *graph_ptr);
+void construct_graph (char *filename, igraph_t *graph_ptr);
 int input_parser (char *input_buffer, igraph_arg *ig_args);
-int solver( igraph_arg *ig_args, char * output_buffer);
+int solver (igraph_arg *ig_args, char ** output_buffer_ptr);
+
 #endif

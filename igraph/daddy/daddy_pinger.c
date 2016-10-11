@@ -5,17 +5,18 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-//char *socket_path = "./socket";
-//char *socket_path = "\0hidden";
 char *socket_path = "\0igraph_daddy";
-int MAX_BUF=150;
+int MAX_BUF=1024;
 int main(int argc, char *argv[]) {
+
+    if (argc < 2) {
+	fprintf (stderr, "Usage: %s \"igraph command line\".\n", argv[0]);
+	exit(1);
+    }
     
     struct sockaddr_un addr;
-    char buf[150];
+    char buf[MAX_BUF];
     int fd,rc;
-
-    if (argc > 1) socket_path=argv[1];
 
     if ( (fd = socket(AF_UNIX, SOCK_STREAM, 0)) == -1) {
 	perror("socket error");
@@ -36,10 +37,10 @@ int main(int argc, char *argv[]) {
 	exit(-1);
     }
 
-    int  size;
+    int size;
     int retval;
-    memset (buf, 0, MAX_BUF);
-    sprintf (buf, "ping: %d\n",  getpid());
+    memset  (buf, 0, MAX_BUF);
+    sprintf (buf, "%s\n", argv[1]);
     size = strlen(buf)+1;
     //send some data
     //while (
@@ -53,13 +54,14 @@ int main(int argc, char *argv[]) {
     }
 
     // wait for the answer
+#ifdef BLAH
     memset (buf, 0, MAX_BUF);
     if ( recv (fd, buf,  MAX_BUF, 0) < 0) {
  	perror ("error reading");
 	exit(-1);
     }
     printf ("%s  \n", buf);
-    
+#endif    
     close(fd);
     return 0;
 }

@@ -12,9 +12,9 @@ FILE * efopen(char * name, char * mode) {
     return fp;
 }
 /************************************************/
-void print_vector(igraph_vector_t *v) {
+void print_vector(igraph_vector_t *v, char * outbuf) {
     long int i, l=igraph_vector_size(v);
-    for (i=0; i<l; i++)  printf("  %li", (long int) VECTOR(*v)[i]);
+    for (i=0; i<l; i++)  sprintf("  %li", (long int) VECTOR(*v)[i]);
     printf("\n");
 }
 

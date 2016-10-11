@@ -29,35 +29,37 @@ void *thread_handler(void *inptr) {
     // read from connection
     char *input_buffer  = emalloc (BUF_BLOCK);  curr_input_buf_size=BUF_BLOCK;
     char *current_write_pos = input_buffer;
-    char *output_buffer;
+    char *output_buffer = NULL;
     // First, read the length of the text message from the socket.
     // If read returns zero, the client closed the connection.
     int client_socket_id = thread_handler_arg_ptr->client_connection_id;
     int retval;
     int done = 0;
     int panic_ctr = 0;
+    printf ("0x%x \n", input_buffer);
     while (!done) {
 	if ( recv(client_socket_id, current_write_pos, BUF_BLOCK, 0) <  0) {
 	    perror ("error reading");
 	    goto cleanup_and_exit;
 	}
-	panic_ctr ++;
-	done = (strchr (input_buffer, '\n') != NULL) || (panic_ctr > 10); 
+	if (++panic_ctr > 10) goto cleanup_and_exit;
+	done = (strchr (input_buffer, '\n') != NULL); 
 	if(!done) increase_buf_size (&input_buffer, &current_write_pos);
     }
-    // parse the input
-    igraph_args ig_args;
-    memset (ig_args, 0, sizeof(igraph_args));
+     printf ("0x%x \n", input_buffer);
+   // parse the input
+    igraph_arg ig_args;
+    memset (&ig_args, 0, sizeof(igraph_arg));
     if (input_parser (input_buffer, &ig_args)) goto cleanup_and_exit;
-    // solve
+    ig_args.graph_ptr = thread_handler_arg_ptr->graph_ptr;
+    // solve 
+    solver(&ig_args, &output_buffer);
     // write to connection
-    output_buffer = emalloc(curr_input_buf_size+BUF_BLOCK);
-    sprintf(output_buffer, "%s pong: %d ", input_buffer, getpid());
     int size  =  strlen(output_buffer)+1;
-    
-    sigignore(SIGPIPE); // we don't want to die here if the client quit
-    printf ("going to send\n");
-    if (send (client_socket_id, output_buffer, size, 0) < 0 ) {
+    // MSG_NOSIGNAL flag Requests not to send SIGPIPE on errors on stream oriented sockets
+    // when the other end breaks the connection. 
+    printf ("going to send, size= %d \n", size);
+    if (send (client_socket_id, output_buffer, size, MSG_NOSIGNAL) < 0 ) {
  	perror ("write error");
 	goto cleanup_and_exit;
     }
@@ -66,8 +68,9 @@ void *thread_handler(void *inptr) {
 
 cleanup_and_exit:
     if (ig_args.node_list) free(ig_args.node_list);
-    free (input_buffer);
-    free (output_buffer);
+     printf ("0x%x \n", input_buffer);
+    if (input_buffer) free (input_buffer);
+    if (output_buffer) free (output_buffer);
     free (thread_handler_arg_ptr);
     return NULL;
 }

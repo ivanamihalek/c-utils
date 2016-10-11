@@ -6,7 +6,6 @@ int curr_input_buf_size = 0;
 
 
 // generic helper functions
-
 FILE * efopen(char * name, char * mode) {
 
     FILE * fp;
@@ -38,10 +37,6 @@ void increase_buf_size (char ** buffer, char ** current_write_pos) {
 }
 
 /***************************************************************************/
-
-#define MAX_TOK 1010
-#define TOKENLENGTH 30
-
 int tokenize ( char token[MAX_TOK][TOKENLENGTH], int * max_token,
 	       char * line , char comment_char) {
     /* assumes the tokens to be no bigger than TOKENLENGTH */ 
@@ -65,11 +60,11 @@ int tokenize ( char token[MAX_TOK][TOKENLENGTH], int * max_token,
 		current_char = 0;
 		current_token++;
 		if ( current_token >= MAX_TOK ) {
-		    return TOK_TOOMNY; /* defined in possum_utils.h */
+		    return 1; /* defined in possum_utils.h */
 		}
 	    }
 	    if ( current_char >= TOKENLENGTH ) {
-		return TOK_TOOLONG;
+		return 1;
 	    }
 	    token[current_token][current_char] = *chrptr;
 	    current_char++;

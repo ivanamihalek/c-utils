@@ -17,6 +17,8 @@ int main ( int argc, char * argv[]) {
     // read in and reconstruct the graph
     igraph_t graph;
     construct_graph(argv[1], &graph);
+
+    printf ("daddy's listening\n");
     
     // main loop acepting the connection and solving the task    
     while (1) {
