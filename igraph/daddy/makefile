@@ -1,14 +1,14 @@
 CFLAGS=     # options for C compiler
 FFLAGS =
 FCOMPL= f90   # name of Fortran compiler
-CCOMPL = gcc -Wall -g
-CPLUSCOMPL = g++
+CCOMPL = gcc -Wall
+CPLUSCOMPL = g++ 
 
 HERE = $(shell pwd)
 
 NAME = daddy
 
-OPTM =  -O
+OPTM =  -O #-g -O0
 
 VPATH = ./
 

@@ -33,27 +33,25 @@ void *thread_handler(void *inptr) {
     // First, read the length of the text message from the socket.
     // If read returns zero, the client closed the connection.
     int client_socket_id = thread_handler_arg_ptr->client_connection_id;
-    int retval;
     int done = 0;
     int panic_ctr = 0;
-    printf ("0x%x \n", input_buffer);
     while (!done) {
-	if ( recv(client_socket_id, current_write_pos, BUF_BLOCK, 0) <  0) {
+	int retv = recv(client_socket_id, current_write_pos, BUF_BLOCK, 0);
+	if ( retv  <  0) {
 	    perror ("error reading");
 	    goto cleanup_and_exit;
 	}
 	if (++panic_ctr > 10) goto cleanup_and_exit;
-	done = (strchr (input_buffer, '\n') != NULL); 
-	if(!done) increase_buf_size (&input_buffer, &current_write_pos);
+	done = (retv<BUF_BLOCK); 
     }
-     printf ("0x%x \n", input_buffer);
-   // parse the input
+    // parse the input
     igraph_arg ig_args;
     memset (&ig_args, 0, sizeof(igraph_arg));
     if (input_parser (input_buffer, &ig_args)) goto cleanup_and_exit;
     ig_args.graph_ptr = thread_handler_arg_ptr->graph_ptr;
-    // solve 
-    solver(&ig_args, &output_buffer);
+    // solve - if an errr exists and can be classified, it will be in the return buffer
+    if (solver(&ig_args, &output_buffer)) goto cleanup_and_exit;
+    if (!output_buffer) goto cleanup_and_exit;
     // write to connection
     int size  =  strlen(output_buffer)+1;
     // MSG_NOSIGNAL flag Requests not to send SIGPIPE on errors on stream oriented sockets
@@ -63,12 +61,9 @@ void *thread_handler(void *inptr) {
  	perror ("write error");
 	goto cleanup_and_exit;
     }
-    printf ("back from send\n");
-    printf ("send retval: %d\n", retval); 
 
 cleanup_and_exit:
     if (ig_args.node_list) free(ig_args.node_list);
-     printf ("0x%x \n", input_buffer);
     if (input_buffer) free (input_buffer);
     if (output_buffer) free (output_buffer);
     free (thread_handler_arg_ptr);

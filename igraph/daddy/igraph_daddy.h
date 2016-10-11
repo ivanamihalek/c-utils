@@ -31,7 +31,7 @@ typedef struct {
     //graph * graph_ptr;
 } thread_handler_arg;
 
-typedef enum {NEIGHBORS, PATH} igraph_method;
+typedef enum {UNK, NEIGHBORS, PATH} igraph_method;
 
 typedef struct {
     igraph_method ig_method;

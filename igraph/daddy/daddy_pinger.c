@@ -40,7 +40,11 @@ int main(int argc, char *argv[]) {
     int size;
     int retval;
     memset  (buf, 0, MAX_BUF);
+#ifdef NWLN
     sprintf (buf, "%s\n", argv[1]);
+#else
+    sprintf (buf, "%s", argv[1]);
+#endif
     size = strlen(buf)+1;
     //send some data
     //while (
@@ -54,7 +58,7 @@ int main(int argc, char *argv[]) {
     }
 
     // wait for the answer
-#ifdef BLAH
+#ifndef SKIP_RECV
     memset (buf, 0, MAX_BUF);
     if ( recv (fd, buf,  MAX_BUF, 0) < 0) {
  	perror ("error reading");

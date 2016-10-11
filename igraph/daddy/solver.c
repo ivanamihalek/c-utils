@@ -22,7 +22,9 @@ int input_parser (char *input_buffer, igraph_arg *ig_args) {
     } else  if (strcmp(token[0], "path")==0) {
 	ig_args->ig_method = PATH;	
     } else {
-	return 1;
+	// this should be picked up and returned as diganostics
+	ig_args->ig_method = UNK;
+	return 0;
     }
     // max token is the last index - the token list is  max_token + 1
     // the first two tokens are method name and 'order' - the number of hops
@@ -47,6 +49,9 @@ int input_parser (char *input_buffer, igraph_arg *ig_args) {
     return 0;
 }
 ////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 int node_list2vs_vector (igraph_vs_t *vs, long int * node_list, int node_list_length) {
     long int i, n = node_list_length ;
     vs->type=IGRAPH_VS_VECTOR;
@@ -68,6 +73,10 @@ void print_vector (char ** outbuf_ptr, igraph_vector_ptr_t *result_ptr) {
     igraph_vector_t *v;    
     long int j, i, l;
     int n_res = igraph_vector_ptr_size(result_ptr);
+    if (n_res==0) {
+	*outbuf_ptr = NULL;
+	return;
+    }
     int alloc_size = 0;
     for (j=0; j<n_res; j++) {
         v = VECTOR(*result_ptr)[j];
@@ -82,7 +91,7 @@ void print_vector (char ** outbuf_ptr, igraph_vector_ptr_t *result_ptr) {
 	l = igraph_vector_size(v);
 	for (i=0; i<l; i++)
 	    sprintf(outbuf + strlen(outbuf), "  %li", (long int) VECTOR(*v)[i]);
-	printf("\n");
+	sprintf (outbuf + strlen(outbuf), "\n");
     }
     *outbuf_ptr = outbuf;
 }
@@ -98,23 +107,56 @@ int neighbors (igraph_arg *ig_args, char ** output_buffer_ptr) {
     igraph_vector_ptr_init (&result, ig_args->node_list_length);
     igraph_neighborhood (graph_ptr, &result, vids,  order, IGRAPH_ALL);
     /// output
-    print_vector (output_buffer_ptr, &result);    
+    print_vector (output_buffer_ptr, &result);
     
+    igraph_vs_destroy(&vids);
     igraph_vector_ptr_destroy(&result);
 
     return 0;
 }
+////
+int path (igraph_arg *ig_args, char ** output_buffer_ptr) {
+
+    if (ig_args->node_list_length < 2) return 1;
+    
+    igraph_t * graph_ptr   = ig_args->graph_ptr;
+    igraph_integer_t vertex_from = ig_args->node_list[0];
+    //vertex_to  could be  list of vertices, though I see no urgent need for that:
+    igraph_vs_t vertex_to; 
+    igraph_vs_vector_small(&vertex_to, ig_args->node_list[1],  -1);
+    igraph_vector_ptr_t result;
+    igraph_vector_t nrgeo;
+    // the second argument here is the number of "to"  vertices
+    igraph_vector_ptr_init (&result, 1);
+    igraph_vector_init(&nrgeo, 0);
+    // the last argument refers to directionality (? is that a word?) of edges
+    igraph_get_all_shortest_paths (graph_ptr, &result, &nrgeo,
+				   vertex_from, vertex_to, IGRAPH_ALL);
+    /// output
+    print_vector (output_buffer_ptr, &result);    
+    
+    igraph_vector_ptr_destroy(&result);
+    igraph_vs_destroy(&vertex_to);
+
+    
+    return 0;
+}
+
 ///
 int solver( igraph_arg *ig_args, char ** output_buffer_ptr) {
 
     printf ("in solver: \n");
     if (ig_args->ig_method == NEIGHBORS) {
 	 printf ("\t method: neighbors \n");
-	 return neighbors(ig_args,output_buffer_ptr);
+	 return neighbors(ig_args, output_buffer_ptr);
     } else if (ig_args->ig_method == PATH) {
 	 printf ("\t method: path \n");
+	 return path(ig_args, output_buffer_ptr);
     } else { // we shouldn't be here ...
-	return 1;
+	*output_buffer_ptr = emalloc(BUF_BLOCK);
+	 printf ("\t method: not recognized \n");
+ 	 sprintf (*output_buffer_ptr, "Error: Unrecognized solver method.\n");
+	 return 0;
     }
     return 0;
 }
