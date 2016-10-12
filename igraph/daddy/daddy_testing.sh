@@ -1,3 +1,4 @@
+#! /bin/bash
 # newline in the input buffer
 echo "test: newline in the input buffer"
 gcc -o pinger  daddy_pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DNWLN
