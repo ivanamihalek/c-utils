@@ -16,10 +16,10 @@
 // input tokenizer array
 #define MAX_TOK 1010
 #define TOKENLENGTH 30
+#define BUF_BLOCK 1024
 
 // hardcoded
 extern char *SOCKET_PATH;
-extern int BUF_BLOCK;
 extern int curr_input_buf_size;
 
 //thread handler arguments - must be wrapped in a single structure
@@ -39,6 +39,7 @@ typedef struct {
     long int * node_list;
     int node_list_length;
     void * graph_ptr;
+    char * error_msg;
 } igraph_arg;
 
 // utility functions

@@ -1,7 +1,6 @@
 #include "igraph_daddy.h"
 
 // hardcoded
-int BUF_BLOCK = 1024;
 int curr_input_buf_size = 0;
 
 

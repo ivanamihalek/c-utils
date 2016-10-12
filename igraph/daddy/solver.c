@@ -16,6 +16,7 @@ int input_parser (char *input_buffer, igraph_arg *ig_args) {
 
     char token[MAX_TOK][TOKENLENGTH];
     int max_token;
+    ig_args->error_msg = NULL;
     
     if (tokenize(token, &max_token, input_buffer, '#')) return 1;
     if (strcmp(token[0], "neighbors")==0) {
@@ -25,28 +26,47 @@ int input_parser (char *input_buffer, igraph_arg *ig_args) {
     } else {
 	// this should be picked up and returned as diganostics
 	ig_args->ig_method = UNK;
+	ig_args->error_msg = emalloc(BUF_BLOCK);
+	sprintf(ig_args->error_msg, "Error: Unrecognized method '%s'\n", token[0]);
 	return 0;
     }
     // max token is the last index - the token list is  max_token + 1
     // the first two tokens are method name and 'order' - the number of hops
     ig_args->node_list_length = max_token + 1 - 2 ;
     if (ig_args->ig_method ==  NEIGHBORS && ig_args->node_list_length < 1) {
-	return 1;
+	ig_args->error_msg = emalloc(BUF_BLOCK);
+	sprintf(ig_args->error_msg, "Error: The list of seed nodes should contain at least one node.\n");
+	return 0;
     }
     if (ig_args->ig_method ==  PATH && ig_args->node_list_length < 2) {
-	return 1;
+	ig_args->error_msg = emalloc(BUF_BLOCK);
+	sprintf(ig_args->error_msg, "Error: The path should contain one 'from' and one 'to' node.\n");
+	return 0;
     }
     
     ig_args->order = atoi(token[1]);
-    if ( ig_args->order < 0  ||  ig_args->order>MAX_ORDER)  return 1;
+    if ( ig_args->order < 0  ||  ig_args->order>MAX_ORDER)  {
+	ig_args->error_msg = emalloc(BUF_BLOCK);
+	sprintf(ig_args->error_msg, "Error: Currently accepted order range: [0:%d]. Given: %d.\n",
+		MAX_ORDER, ig_args->order);
+	return 0;
+    }
 
     ig_args->node_list = emalloc(ig_args->node_list_length * sizeof(long int));
 
     int i;
     for(i=0; i<ig_args->node_list_length; i++) {
+	int pos;
+	for (pos=0; pos<strlen(token[2+i]); pos ++ ) {
+	    if (!isdigit(token[2+i][pos])) {
+		ig_args->error_msg = emalloc(BUF_BLOCK);
+		sprintf(ig_args->error_msg,
+			"Error: Nodes should be given as integer numbers. Found in input: %s.\n", token[2+i]);
+		return 0;
+	    }
+	}
 	ig_args->node_list[i] = atol(token[2+i]);	
     }
-    
     return 0;
 }
 ////////////////////////////////////////////////////////
@@ -157,7 +177,11 @@ int path (igraph_arg *ig_args, char ** output_buffer_ptr) {
 ///
 int solver( igraph_arg *ig_args, char ** output_buffer_ptr) {
 
-    printf ("in solver: \n");
+    if(ig_args->error_msg) {
+	*output_buffer_ptr = ig_args->error_msg;
+	 return 0;
+    }
+ 
     if (ig_args->ig_method == NEIGHBORS) {
 	 printf ("\t method: neighbors \n");
 	 return neighbors(ig_args, output_buffer_ptr);
