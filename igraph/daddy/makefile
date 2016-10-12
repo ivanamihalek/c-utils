@@ -8,7 +8,7 @@ HERE = $(shell pwd)
 
 NAME = daddy
 
-OPTM =  -O #-g -O0
+OPTM =  -O # -g -O0 # recommended combo for valgrind
 
 VPATH = ./
 

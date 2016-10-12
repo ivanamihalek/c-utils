@@ -24,7 +24,7 @@ int  create_socket_connection() {
 }
 ////////////////////////////////////
 void *thread_handler(void *inptr) {
-    printf ("Hello from thread_handler\n");
+
     thread_handler_arg *thread_handler_arg_ptr = (thread_handler_arg *) inptr;
     // read from connection
     char *input_buffer  = emalloc (BUF_BLOCK);  curr_input_buf_size=BUF_BLOCK;
@@ -41,8 +41,13 @@ void *thread_handler(void *inptr) {
 	    perror ("error reading");
 	    goto cleanup_and_exit;
 	}
-	if (++panic_ctr > 10) goto cleanup_and_exit;
-	done = (retv<BUF_BLOCK); 
+	if (++panic_ctr > 10) {
+	    char * errmsg =  "Error: Input too long.\n";
+	    send (client_socket_id, errmsg, strlen(errmsg), MSG_NOSIGNAL);
+	    goto cleanup_and_exit;
+	}
+	done = (retv<BUF_BLOCK);
+	if (!done) increase_buf_size (&input_buffer, &current_write_pos);
     }
     // parse the input
     igraph_arg ig_args;
@@ -56,7 +61,6 @@ void *thread_handler(void *inptr) {
     int size  =  strlen(output_buffer)+1;
     // MSG_NOSIGNAL flag Requests not to send SIGPIPE on errors on stream oriented sockets
     // when the other end breaks the connection. 
-    printf ("going to send, size= %d \n", size);
     if (send (client_socket_id, output_buffer, size, MSG_NOSIGNAL) < 0 ) {
  	perror ("write error");
 	goto cleanup_and_exit;

@@ -1,5 +1,11 @@
 #! /bin/bash
+
+
+# don't foget: 
+# valgrind --leak-check=yes ./daddy /databases/db.txt
+
 # newline in the input buffer
+echo
 echo "test: newline in the input buffer"
 gcc -o pinger  daddy_pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DNWLN
 ./pinger "neighbors 1  57572  "
@@ -22,14 +28,35 @@ echo "test: space before method name"
 # space before  method name
 ./pinger " neighbors 1  57572"
 
+
+# order out of range
+echo "test: order out of range"
+./pinger " neighbors -1  57572 "
+./pinger " neighbors 10  57572"
+./pinger " neighbors 1y  57572"
+
+# input that is not number(s)
+echo
+echo "test: input that is not number(s) "
+./pinger " neighbors 1  57572abg "
+
 # very short input 
+echo
 echo "test: very short input "
 ./pinger "neighbors 1   "
 ./pinger "path  1  57572 "
 
-# input that is not number(s)
-echo "test: input that is not number(s) "
-./pinger " neighbors 1  57572abg "
-
 # very long  input
+echo
+echo "test: very long input"
+gcc -o pinger  daddy_pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DLONG_INPUT
+./pinger "neighbors 1 "
+
+# very too long  input
+echo
+echo "test: too long input"
+gcc -o pinger  daddy_pinger.c -lpthread -ligraph  -I/usr/local/include/igraph -DTOO -DLONG_INPUT
+./pinger "neighbors 1 "
+
+
 

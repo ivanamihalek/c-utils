@@ -7,6 +7,17 @@
 
 char *socket_path = "\0igraph_daddy";
 int MAX_BUF=1024;
+
+void * emalloc(int size) {
+    void * ptr;
+    if ((ptr = calloc(size, 1)) == NULL) {
+	fprintf (stderr,  "emalloc: no memory for %d bytes", size);
+	exit(1);
+    }
+   return ptr;
+}
+
+/////////////////////////////////////
 int main(int argc, char *argv[]) {
 
     if (argc < 2) {
@@ -14,10 +25,20 @@ int main(int argc, char *argv[]) {
 	exit(1);
     }
     
+#ifdef LONG_INPUT
+    #ifdef TOO
+    MAX_BUF *= 50;
+    # else
+    MAX_BUF *= 5;
+    # endif
+#endif
+    
     struct sockaddr_un addr;
-    char buf[MAX_BUF];
+    char * buf, * aux_buf;
     int fd,rc;
 
+    buf = emalloc(MAX_BUF);
+    
     if ( (fd = socket(AF_UNIX, SOCK_STREAM, 0)) == -1) {
 	perror("socket error");
 	exit(-1);
@@ -37,18 +58,28 @@ int main(int argc, char *argv[]) {
 	exit(-1);
     }
 
-    int size;
-    int retval;
-    memset  (buf, 0, MAX_BUF);
 #ifdef NWLN
     sprintf (buf, "%s\n", argv[1]);
 #else
     sprintf (buf, "%s", argv[1]);
 #endif
+    
+#ifdef LONG_INPUT
+    while (strlen(buf)+strlen(" 12345 6789 ")<MAX_BUF) sprintf(buf+strlen(buf),  " 12345 6789 ");
+#endif
+
+    int size;
+    int retval;
     size = strlen(buf)+1;
     //send some data
-    //while (
-    printf (" ... sending\n");
+# ifndef LONG_INPUT
+    printf (" ... sending: %s\n", buf);
+# else
+    aux_buf = emalloc(100);
+    memcpy (aux_buf, buf, 30);
+    printf (" ... sending big input (%d bytes)  %30s ...\n", size, aux_buf);
+    free(aux_buf);
+# endif
     retval = send(fd, buf, size, 0);
     //}
     printf ("done sending\n");
@@ -64,8 +95,14 @@ int main(int argc, char *argv[]) {
  	perror ("error reading");
 	exit(-1);
     }
+    #ifdef LONG_INPUT
+    sprintf (buf+100, " ...");
+    buf[strlen(buf)] = '\0';
+    #endif    
     printf ("%s  \n", buf);
 #endif    
     close(fd);
+
+    free(buf);
     return 0;
 }

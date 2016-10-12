@@ -36,6 +36,14 @@ void increase_buf_size (char ** buffer, char ** current_write_pos) {
 }
 
 /***************************************************************************/
+int contains_nondigit (char * string) {
+    int pos;
+    for (pos=0; pos<strlen(string); pos ++ ) {
+	if (!isdigit(string[pos])) return 1;
+    }
+    return 0;
+}
+/***************************************************************************/
 int tokenize ( char token[MAX_TOK][TOKENLENGTH], int * max_token,
 	       char * line , char comment_char) {
     /* assumes the tokens to be no bigger than TOKENLENGTH */ 

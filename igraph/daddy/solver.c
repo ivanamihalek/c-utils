@@ -44,6 +44,13 @@ int input_parser (char *input_buffer, igraph_arg *ig_args) {
 	return 0;
     }
     
+    if (contains_nondigit(token[1])) {
+	ig_args->error_msg = emalloc(BUF_BLOCK);
+	sprintf(ig_args->error_msg,
+		"Error: Order (max number of hops) is not a non-negative integer: %s.\n", token[1]);
+	return 0;
+    }
+    
     ig_args->order = atoi(token[1]);
     if ( ig_args->order < 0  ||  ig_args->order>MAX_ORDER)  {
 	ig_args->error_msg = emalloc(BUF_BLOCK);
@@ -56,14 +63,11 @@ int input_parser (char *input_buffer, igraph_arg *ig_args) {
 
     int i;
     for(i=0; i<ig_args->node_list_length; i++) {
-	int pos;
-	for (pos=0; pos<strlen(token[2+i]); pos ++ ) {
-	    if (!isdigit(token[2+i][pos])) {
-		ig_args->error_msg = emalloc(BUF_BLOCK);
-		sprintf(ig_args->error_msg,
-			"Error: Nodes should be given as integer numbers. Found in input: %s.\n", token[2+i]);
-		return 0;
-	    }
+	if (contains_nondigit(token[2+i])) {
+	    ig_args->error_msg = emalloc(BUF_BLOCK);
+	    sprintf(ig_args->error_msg,
+		"Error: Nodes should be given as non-negative  integers. Found in input: %s.\n", token[2+i]);
+	    return 0;
 	}
 	ig_args->node_list[i] = atol(token[2+i]);	
     }
@@ -183,16 +187,13 @@ int solver( igraph_arg *ig_args, char ** output_buffer_ptr) {
     }
  
     if (ig_args->ig_method == NEIGHBORS) {
-	 printf ("\t method: neighbors \n");
-	 return neighbors(ig_args, output_buffer_ptr);
+	return neighbors(ig_args, output_buffer_ptr);
     } else if (ig_args->ig_method == PATH) {
-	 printf ("\t method: path \n");
-	 return path(ig_args, output_buffer_ptr);
+	return path(ig_args, output_buffer_ptr);
     } else { // we shouldn't be here ...
 	*output_buffer_ptr = emalloc(BUF_BLOCK);
-	 printf ("\t method: not recognized \n");
- 	 sprintf (*output_buffer_ptr, "Error: Unrecognized solver method.\n");
-	 return 0;
+	sprintf (*output_buffer_ptr, "Error: Unrecognized solver method.\n");
+	return 0;
     }
     return 0;
 }

@@ -46,6 +46,7 @@ typedef struct {
 FILE * efopen(char * name, char * mode);
 void * emalloc(int size);
 void increase_buf_size (char ** buffer, char ** current_write_pos);
+int contains_nondigit (char * string);
 int tokenize (char token[MAX_TOK][TOKENLENGTH], int * max_token,
 	       char * line , char comment_char);
 // threading related functions
