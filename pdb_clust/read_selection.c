@@ -4,6 +4,25 @@
 # include <string.h>
 # include "utils.h"
 # include "pdbclust.h"
+/*
+  input format
+F  3
+K  48
+R  50
+D  59
+C  62
+G  71
+A  78
+Y  79
+E  82
+G  91
+A  97
+C  100
+G  102
+L  109
+etc 
+ */
+
 
 /****************************************************************************/
 int errmsg ( FILE *fptr, int line_ctr, char line[LONGSTRING],

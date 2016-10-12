@@ -7,17 +7,17 @@
 # newline in the input buffer
 echo
 echo "test: newline in the input buffer"
-gcc -o pinger  daddy_pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DNWLN
+gcc -o pinger  pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DNWLN
 ./pinger "neighbors 1  57572  "
 
 # not waiting for response
 echo "test: not waiting for response"
-gcc -o pinger  daddy_pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DSKIP_RECV
+gcc -o pinger  pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DSKIP_RECV
 ./pinger "neigbors 1  57572  "
 
 # no method name
 echo "test: missing method name"
-gcc -o pinger  daddy_pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph
+gcc -o pinger  pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph
 ./pinger " 57572 7049"
 
 echo "test: bad method name"
@@ -49,13 +49,13 @@ echo "test: very short input "
 # very long  input
 echo
 echo "test: very long input"
-gcc -o pinger  daddy_pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DLONG_INPUT
+gcc -o pinger  pinger.c  -lpthread  -ligraph    -I/usr/local/include/igraph -DLONG_INPUT
 ./pinger "neighbors 1 "
 
 # very too long  input
 echo
 echo "test: too long input"
-gcc -o pinger  daddy_pinger.c -lpthread -ligraph  -I/usr/local/include/igraph -DTOO -DLONG_INPUT
+gcc -o pinger  pinger.c -lpthread -ligraph  -I/usr/local/include/igraph -DTOO -DLONG_INPUT
 ./pinger "neighbors 1 "
 
 
