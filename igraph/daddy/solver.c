@@ -1,8 +1,5 @@
 #include "igraph_daddy.h"
 
-// known problems: there is a memory leak
-// around  igraph's structural_properties.c:3025
-// even worse around  structural_properties.c:1033
 
 #define MAX_ORDER 5 // no more than 5 hops away
 void construct_graph(char *filename, igraph_t *graph_ptr){
@@ -103,7 +100,6 @@ int result_cleanup(igraph_vector_ptr_t *result_ptr) { // why do I have to do thi
     long int i;
     for (i=0; i<igraph_vector_ptr_size(result_ptr); i++) {
 	igraph_vector_t *v=VECTOR(*result_ptr)[i];
-	igraph_vector_print(v);
 	igraph_vector_destroy(v);
 	igraph_free(v);
     }
