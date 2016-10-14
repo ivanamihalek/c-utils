@@ -1,7 +1,7 @@
 #include "igraph_daddy.h"
 
 // hardcoded
-char *SOCKET_PATH = "\0igraph_daddy";
+char *SOCKET_PATH = "/tmp/igraph_daddy";
 
 //////////////////////////////////////////////////
 int main ( int argc, char * argv[]) {

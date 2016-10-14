@@ -8,10 +8,16 @@ int  create_socket_connection() {
  	perror("socket error");
 	exit(-1);
     }
+    unlink(SOCKET_PATH);
     memset(&addr, 0, sizeof(addr));
     addr.sun_family = AF_UNIX;
-    *addr.sun_path = '\0';
-    strncpy(addr.sun_path+1, SOCKET_PATH+1, sizeof(addr.sun_path)-2);
+    if (*SOCKET_PATH == '\0') {
+	*addr.sun_path = '\0';
+	strncpy(addr.sun_path+1, SOCKET_PATH+1, sizeof(addr.sun_path)-2);
+    } else {
+	strncpy(addr.sun_path, SOCKET_PATH, sizeof(addr.sun_path)-1);
+    }
+	
     if (bind(fd, (struct sockaddr*)&addr, sizeof(addr)) == -1) {
 	perror("bind error");
 	exit(-1);

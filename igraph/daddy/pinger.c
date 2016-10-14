@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-char *socket_path = "\0igraph_daddy";
+char *socket_path = "/tmp/igraph_daddy";
 int MAX_BUF=1024;
 
 void * emalloc(int size) {
