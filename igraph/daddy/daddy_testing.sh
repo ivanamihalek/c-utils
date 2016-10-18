@@ -59,4 +59,8 @@ gcc -o pinger  pinger.c -DTOO -DLONG_INPUT
 ./pinger "neighbors 1 "
 
 
-
+# newline in the input buffer
+echo
+echo "test: shortest path"
+gcc -o pinger  pinger.c  
+./pinger "neighbors 0  57572  4079 "
