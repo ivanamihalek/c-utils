@@ -33,7 +33,7 @@ int main(int argc, char*argv[]) {
 
     /* ncol format http://igraph.org/c/doc/igraph-Foreign.html#igraph_read_graph_ncol*/
     FILE * infile  =  efopen(argv[1], "r") ;
-    int retval  =  igraph_read_graph_ncol (&graph, infile, NULL, TRUE,
+    int retval  =  igraph_read_graph_ncol (&graph, infile, NULL, 1,
 					   IGRAPH_ADD_WEIGHTS_NO,  IGRAPH_UNDIRECTED);
     fclose(infile);
     printf ("  %d   %d \n", retval, IGRAPH_PARSEERROR);
