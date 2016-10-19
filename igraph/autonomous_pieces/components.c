@@ -50,7 +50,7 @@ int main(int argc, char*argv[]) {
     
     int number_of_components  =  igraph_vector_ptr_size(&components);
     igraph_vcount(g)
-    printf ("number of vertices:  %d\n", igraph_vcount(g));
+    printf ("number of vertices:  %d\n", igraph_vcount(&graph));
     int i;
     for (i=0; i<igraph_vector_ptr_size(&complist); i++) { 
 	igraph_t *comp=VECTOR(complist)[i];
