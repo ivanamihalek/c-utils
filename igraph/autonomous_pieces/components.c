@@ -39,7 +39,7 @@ int main(int argc, char*argv[]) {
     
     igraph_bool_t directed  = IGRAPH_UNDIRECTED;
     igraph_read_graph_edgelist (&graph, infile,  0, directed);
-    printf ("number of vertices:  %d\n", igraph_vcount(&graph));
+    printf ("number of vertices:  %d\n", (int)igraph_vcount(&graph));
     
     /*int igraph_decompose(const igraph_t *graph, igraph_vector_ptr_t *components, 
 		     igraph_connectedness_t mode,
