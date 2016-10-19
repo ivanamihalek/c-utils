@@ -77,7 +77,13 @@ int main(int argc, char*argv[]) {
     igraph_integer_t size;
     igraph_vs_size (&graph, &all_vertices_selector, &size);
     printf ("iterator size: %li \n", (long int) size);
-  
+
+     igraph_vit_create(&graph, all_vertices_selector, &vertex_iterator);
+     while (!IGRAPH_VIT_END(vertex_iterator)) {
+         printf("\t %li \n", (long int) IGRAPH_VIT_GET(vertex_iterator));
+         IGRAPH_VIT_NEXT(vertex_iterator);
+     }
+    
     //igraph_vit_create (&graph, vertices, &vertex_iterator);
     
     //find_vector_by_name (&graph);
