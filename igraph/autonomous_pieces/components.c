@@ -33,15 +33,12 @@ int main(int argc, char*argv[]) {
     /* empty undirected graph, zero vertices */
     igraph_empty(&graph, 0, 0);
     printf ("number of vertices:  %d\n", igraph_vcount(&graph));
-    exit(1);
-    /*The number of vertices in the graph. If smaller than the largest integer in
+     /*The number of vertices in the graph. If smaller than the largest integer in
       the file it will be ignored. It is thus safe to supply zero here. */
-    igraph_integer_t zero = 0;
-
     FILE * infile  =  efopen(argv[1], "r") ;
     
     igraph_bool_t directed  = IGRAPH_UNDIRECTED;
-    igraph_read_graph_edgelist (&graph, infile,  zero, directed);
+    igraph_read_graph_edgelist (&graph, infile,  0, directed);
     printf ("number of vertices:  %d\n", igraph_vcount(&graph));
     
     /*int igraph_decompose(const igraph_t *graph, igraph_vector_ptr_t *components, 
