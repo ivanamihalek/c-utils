@@ -67,7 +67,7 @@ int main(int argc, char*argv[]) {
 					   IGRAPH_ADD_WEIGHTS_NO,  IGRAPH_UNDIRECTED);
     fclose(infile);
     if (retval == IGRAPH_PARSEERROR) {
-	fprintf ("Error reading %s\n", argv[1]);
+	fprintf (stderr, "Error reading %s\n", argv[1]);
     }
     printf ("number of vertices:  %d\n",  igraph_vcount(&graph));
     /* setup iterator over all vertices: selector */
