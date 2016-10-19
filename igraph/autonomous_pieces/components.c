@@ -38,7 +38,7 @@ int main(int argc, char*argv[]) {
     
     igraph_bool_t directed  = IGRAPH_UNDIRECTED;
     igraph_read_graph_edgelist (&graph, infile,  zero, directed);
-
+    printf ("vector : %d", );
     /*int igraph_decompose(const igraph_t *graph, igraph_vector_ptr_t *components, 
 		     igraph_connectedness_t mode,
 		     long int maxcompno, long int minelements);
@@ -49,9 +49,12 @@ int main(int argc, char*argv[]) {
     igraph_decompose (&graph, &components, IGRAPH_WEAK, -1, 2);
     
     int number_of_components  =  igraph_vector_ptr_size(&components);
-    
-    printf ("number of components:  %d\n", number_of_components);
-
+    igraph_vcount(g)
+    printf ("number of vertices:  %d\n", igraph_vcount(g));
+    int i;
+    for (i=0; i<igraph_vector_ptr_size(&complist); i++) { 
+	igraph_t *comp=VECTOR(complist)[i];
+    }
     /*Don't forget to call igraph_destroy() and free() on the elements of
       this pointer vector to free unneeded memory. Alternatively, you can simply
       call igraph_decompose_destroy() that does this for you. 
