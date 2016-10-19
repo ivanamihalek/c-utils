@@ -46,7 +46,7 @@ int main(int argc, char*argv[]) {
     igraph_vector_ptr_t components;
     igraph_vector_ptr_init (&components, 0);
 
-    igraph_decompose (&graph, &components, IGRAPH_WEAK, -1, 2);
+    igraph_decompose (&graph, &components, IGRAPH_WEAK, -1, 1);
     
     int number_of_components  =  igraph_vector_ptr_size(&components);
     
