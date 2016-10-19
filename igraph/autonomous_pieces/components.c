@@ -30,6 +30,7 @@ int main(int argc, char*argv[]) {
     
  
     igraph_t graph;
+    printf ("number of vertices:  %d\n", igraph_vcount(&graph));
     /*The number of vertices in the graph. If smaller than the largest integer in
       the file it will be ignored. It is thus safe to supply zero here. */
     igraph_integer_t zero = 0;
@@ -38,7 +39,7 @@ int main(int argc, char*argv[]) {
     
     igraph_bool_t directed  = IGRAPH_UNDIRECTED;
     igraph_read_graph_edgelist (&graph, infile,  zero, directed);
-    printf ("number of vertices:  %ld\n", igraph_vcount(&graph));
+    printf ("number of vertices:  %d\n", igraph_vcount(&graph));
     
     /*int igraph_decompose(const igraph_t *graph, igraph_vector_ptr_t *components, 
 		     igraph_connectedness_t mode,
