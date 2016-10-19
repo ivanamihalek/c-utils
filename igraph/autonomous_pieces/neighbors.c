@@ -15,8 +15,8 @@ FILE * efopen(char * name, char * mode) {
 long int find_vector_by_name(igraph_t * g){
     /*** do we have the name attribute ? ***/
     printf ("have names?  %d\n",
-	    (int) igraph_cattribute_has_attr (g, IGRAPH_ATTRIBUTE_VERTEX, "vnames"));
-    
+	    (int) igraph_cattribute_has_attr (g, IGRAPH_ATTRIBUTE_VERTEX, "name"));
+    return 0;
 }
 
 
