@@ -27,7 +27,9 @@ int main(int argc, char*argv[]) {
 	fprintf (stderr, "Usage: %s  <path to graph>\n", argv[0]);
 	exit(1);
     }
-    
+    /* turn on attribute handling */
+    igraph_i_set_attribute_table(&igraph_cattribute_table);
+
  
     igraph_t graph;
     printf ("number of vertices:  %d\n", igraph_vcount(&graph));
