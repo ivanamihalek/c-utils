@@ -64,7 +64,10 @@ int main(int argc, char*argv[]) {
 	fprintf ("Error reading %s\n", argv[1]);
     }
     printf ("number of vertices:  %d\n",  igraph_vcount(&graph));
- 
+    find_vector_by_name (&graph);
+    exit(1);
+
+    int order = atoi(argv[2]);
     // 57572 DOCK6
     // 7049 TGFBR3
     // 2263 FGFBP3
