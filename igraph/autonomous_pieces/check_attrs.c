@@ -1,8 +1,18 @@
-
 #include <igraph.h>
 #include <stdio.h>
 #include <stdlib.h>
 
+/************************************************/
+FILE * efopen(char * name, char * mode) {
+
+    FILE * fp;
+    if ((fp = fopen(name, mode)) == NULL) {
+	fprintf (stderr,    "Cannot open \"%s\" for \"%s\"\n", name, mode);
+	return NULL;
+    }
+    return fp;
+}
+/************************************************/
 void check_attr(igraph_t *graph, int offset) {
 
     if (!igraph_cattribute_has_attr(graph, IGRAPH_ATTRIBUTE_GRAPH, "name")) {
