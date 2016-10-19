@@ -21,7 +21,7 @@ long int find_vector_by_name(igraph_t * g){
 
 
 /************************************************/
-void print_vector(igraph_vector_t *v, char * outbuf) {
+void print_vector(igraph_vector_t *v) {
     long int i, l=igraph_vector_size(v);
     for (i=0; i<l; i++)  sprintf("  %li", (long int) VECTOR(*v)[i]);
     printf("\n");
