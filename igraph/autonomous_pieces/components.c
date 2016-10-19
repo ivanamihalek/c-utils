@@ -52,8 +52,8 @@ int main(int argc, char*argv[]) {
     int number_of_components  =  igraph_vector_ptr_size(&components);
         
     int i;
-    for (i=0; i<igraph_vector_ptr_size(&complist); i++) { 
-	igraph_t *comp=VECTOR(complist)[i];
+    for (i=0; i<igraph_vector_ptr_size(&components); i++) { 
+	igraph_t *comp=VECTOR(components)[i];
     }
     /*Don't forget to call igraph_destroy() and free() on the elements of
       this pointer vector to free unneeded memory. Alternatively, you can simply
