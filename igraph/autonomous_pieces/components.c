@@ -18,7 +18,8 @@ void print_vector(igraph_vector_t *v) {
     printf("\n");
 }
 
-
+// vertex ids are taken literally to be their numbers
+//https://lists.nongnu.org/archive/html/igraph-help/2009-08/msg00026.html
 /************************************************/
 int main(int argc, char*argv[]) {
 
@@ -30,12 +31,10 @@ int main(int argc, char*argv[]) {
  
     igraph_t graph;
 
-    /* empty undirected graph, zero vertices */
-    igraph_empty(&graph, 0, 0);
-    printf ("number of vertices:  %d\n", igraph_vcount(&graph));
-
+    /* ncol format http://igraph.org/c/doc/igraph-Foreign.html#igraph_read_graph_ncol*/
     FILE * infile  =  efopen(argv[1], "r") ;
-    int retval  =  igraph_read_graph_edgelist (&graph, infile,  0, IGRAPH_UNDIRECTED);
+    int retval  =  igraph_read_graph_ncol (&graph, infile, NULL, TRUE,
+					   IGRAPH_ADD_WEIGHTS_NO,  IGRAPH_UNDIRECTED);
     fclose(infile);
     printf ("  %d   %d \n", retval, IGRAPH_PARSEERROR);
     printf ("number of vertices:  %d\n",  igraph_vcount(&graph));
