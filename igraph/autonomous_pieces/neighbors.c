@@ -14,9 +14,14 @@ FILE * efopen(char * name, char * mode) {
 /************************************************/
 long int find_vector_by_name(igraph_t * g){
     /*** do we have the name attribute ? ***/
-    printf ("0x%x   have names? \n", g); fflush(stdout);
-    printf ("  have names?  %d\n", 
+    // could not get this to work
+    /* printf ("  have names?  %d\n", 
 	    (int) igraph_cattribute_has_attr (g, IGRAPH_ATTRIBUTE_VERTEX, "name"));
+    */
+
+   
+
+    
     return 0;
 }
 
@@ -65,7 +70,17 @@ int main(int argc, char*argv[]) {
 	fprintf ("Error reading %s\n", argv[1]);
     }
     printf ("number of vertices:  %d\n",  igraph_vcount(&graph));
-    find_vector_by_name (&graph);
+    /* setup iterator over all vertices: selector */
+    igraph_vs_t all_vertices_selector;
+    igraph_vit_t vertex_iterator;
+    igraph_vs_all  (&all_vertices_selector);
+    igraph_integer_t size;
+    igraph_vs_size (&graph, &all_vertices_selector, &size);
+    printf ("%li ", (long int) size);
+  
+    //igraph_vit_create (&graph, vertices, &vertex_iterator);
+    
+    //find_vector_by_name (&graph);
     exit(1);
 
     int order = atoi(argv[2]);
@@ -91,7 +106,8 @@ int main(int argc, char*argv[]) {
     for (i=0; i<igraph_vector_ptr_size(&result); i++) {
 	print_vector(VECTOR(result)[i]);
     }
-
+    
+    igraph_vit_destroy (&vertex_iterator);
     igraph_vector_ptr_destroy(&result);
     igraph_destroy(&graph);
 

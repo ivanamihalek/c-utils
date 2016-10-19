@@ -54,9 +54,7 @@ int main(int argc, char*argv[]) {
 					   IGRAPH_ADD_WEIGHTS_NO,  IGRAPH_UNDIRECTED);
     fclose(infile);
     
-    igraph_error_handler_t* oldhandler;
-    int result;
-
+ 
     igraph_i_set_attribute_table(&igraph_cattribute_table);
    
     check_attr(&graph, 10);
