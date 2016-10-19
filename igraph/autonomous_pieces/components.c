@@ -35,9 +35,9 @@ int main(int argc, char*argv[]) {
     printf ("number of vertices:  %d\n", igraph_vcount(&graph));
 
     FILE * infile  =  efopen(argv[1], "r") ;
-    igraph_read_graph_edgelist (&graph, infile,  0, IGRAPH_UNDIRECTED);
+    int retval  =  igraph_read_graph_edgelist (&graph, infile,  0, IGRAPH_UNDIRECTED);
     fclose(infile);
-    
+    printf ("  %d   %d \n", retval, IGRAPH_PARSEERROR);
     printf ("number of vertices:  %d\n",  igraph_vcount(&graph));
     
     /*int igraph_decompose(const igraph_t *graph, igraph_vector_ptr_t *components, 
