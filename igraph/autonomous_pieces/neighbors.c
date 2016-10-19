@@ -12,6 +12,15 @@ FILE * efopen(char * name, char * mode) {
     return fp;
 }
 /************************************************/
+long int find_vector_by_name(igraph_t * g){
+    /*** do we have the name attribute ? ***/
+    printf ("have names?  %d\n",
+	    (int) igraph_cattribute_has_attr (g, IGRAPH_ATTRIBUTE_VERTEX, "vnames");
+    
+}
+
+
+/************************************************/
 void print_vector(igraph_vector_t *v, char * outbuf) {
     long int i, l=igraph_vector_size(v);
     for (i=0; i<l; i++)  sprintf("  %li", (long int) VECTOR(*v)[i]);
@@ -47,21 +56,22 @@ int main(int argc, char*argv[]) {
 	exit(1);
     }
     FILE * infile  =  efopen(argv[1], "r") ;
-    igraph_integer_t order = atoi(argv[2]);
-   
+    igraph_t graph;
+    int retval  =  igraph_read_graph_ncol (&graph, infile, NULL, 1,
+					   IGRAPH_ADD_WEIGHTS_NO,  IGRAPH_UNDIRECTED);
+    fclose(infile);
+    if (retval == IGRAPH_PARSEERROR) {
+	fprintf ("Error reading %s\n", argv[1]);
+    }
+    printf ("number of vertices:  %d\n",  igraph_vcount(&graph));
+ 
     // 57572 DOCK6
     // 7049 TGFBR3
     // 2263 FGFBP3
     igraph_vs_t  vids; 
     args2vs_vector (&vids, argv, 3, argc-1);
     
-    igraph_t graph;
-    /*The number of vertices in the graph. If smaller than the largest integer in
-      the file it will be ignored. It is thus safe to supply zero here. */
-    igraph_integer_t zero = 0;
-    igraph_bool_t directed  = IGRAPH_UNDIRECTED;
-    igraph_read_graph_edgelist (&graph, infile,  zero, directed);
-    fclose(infile);
+     fclose(infile);
     //printf ("done reading in the graph\n"); fflush(stdout);
     /* neighborhood calculation: */
     /* int igraph_neighborhood(const igraph_t *graph, igraph_vector_ptr_t *res,

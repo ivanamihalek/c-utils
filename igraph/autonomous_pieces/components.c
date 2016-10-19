@@ -36,7 +36,9 @@ int main(int argc, char*argv[]) {
     int retval  =  igraph_read_graph_ncol (&graph, infile, NULL, 1,
 					   IGRAPH_ADD_WEIGHTS_NO,  IGRAPH_UNDIRECTED);
     fclose(infile);
-    printf ("  %d   %d \n", retval, IGRAPH_PARSEERROR);
+    if (retval == IGRAPH_PARSEERROR) {
+	fprintf ("Error reading %s\n", argv[1]);
+    }
     printf ("number of vertices:  %d\n",  igraph_vcount(&graph));
     
     /*int igraph_decompose(const igraph_t *graph, igraph_vector_ptr_t *components, 
