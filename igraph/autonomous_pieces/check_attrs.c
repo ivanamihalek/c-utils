@@ -48,15 +48,6 @@ int main(int argc, char*argv[]) {
     int result;
 
     igraph_i_set_attribute_table(&igraph_cattribute_table);
-
-    oldhandler=igraph_set_error_handler(igraph_error_handler_ignore);
-    if ((result=igraph_read_graph_graphml(&graph, ifile, 0))) {
-	/* maybe it is simply disabled at compile-time */
-	if (result == IGRAPH_UNIMPLEMENTED) return 77;
-	return 1;
-    }
-    igraph_set_error_handler(oldhandler);
-
    
     check_attr(&graph, 10);
 
