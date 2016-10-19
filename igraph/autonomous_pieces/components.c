@@ -31,7 +31,7 @@ int main(int argc, char*argv[]) {
     igraph_t graph;
 
     /* empty undirected graph, zero vertices */
-    igraph_empty(&g, 0, 0);
+    igraph_empty(&graph, 0, 0);
     printf ("number of vertices:  %d\n", igraph_vcount(&graph));
     exit(1);
     /*The number of vertices in the graph. If smaller than the largest integer in
