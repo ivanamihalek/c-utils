@@ -76,7 +76,7 @@ int main(int argc, char*argv[]) {
     igraph_vs_all  (&all_vertices_selector);
     igraph_integer_t size;
     igraph_vs_size (&graph, &all_vertices_selector, &size);
-    printf ("%li ", (long int) size);
+    printf ("iterator size: %li \n", (long int) size);
   
     //igraph_vit_create (&graph, vertices, &vertex_iterator);
     
