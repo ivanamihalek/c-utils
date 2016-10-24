@@ -4,7 +4,7 @@
 # include <limits.h>
 
 # define PANIC( errmsg )			\
-   fprintf (stderr,"%s\n" errmsg);		\
+   fprintf (stderr,"%s\n", errmsg);		\
    exit(1)
 
 void cluster_counter (int  no_of_things,  int *neighbors[], int * mask,
