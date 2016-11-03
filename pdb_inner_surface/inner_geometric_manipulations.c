@@ -175,23 +175,77 @@ int coords2cylindrical(Protein *protein) {
         Residue * res = protein->residue + resctr;
         int i;
         for (i=0; i< res->no_atoms; i++) {
-            double x = res->atom->coord[0];
-            double y = res->atom->coord[1], z = res->atom->coord[2];
-			res->atom->rho = sqrt(x*x+y*y);
-			if (res->atom->rho >1.e-6) {
-				res->atom->theta = acos(x/res->atom->rho);
-				if (y<0) res->atom->theta =  2*M_PI - res->atom->theta;
+            double x = res->atom[i].coord[0];
+            double y = res->atom[i].coord[1], z = res->atom[i].coord[2];
+			res->atom[i].rho = sqrt(x*x+y*y);
+			if (res->atom[i].rho >1.e-6) {
+				res->atom[i].theta = acos(x/res->atom[i].rho);
+				if (y<0) res->atom[i].theta =  2*M_PI - res->atom[i].theta;
 
 			} else	 {
-				res->atom->theta = 0; // it shouldn't matter in this case
+				res->atom[i].theta = 0; // it shouldn't matter in this case
 			}
-			res->atom->z = z;
+			res->atom[i].z = z;
         }
     }
 	return 0;
 }
 
+/*************************************************************************/
+int is_pointing_inward(Residue * res) {
+
+	//finc ca and cb
+	int i;
+	double * calpha = NULL;
+	double *  cbeta = NULL;
+
+    for (i=0; i< res->no_atoms; i++) {
+		if ( ! strcmp(res->atom[i].type, "CA")) {
+			calpha = res->atom[i].coord;
+		} else if  (! strcmp(res->atom[i].type, "CB")) {
+			cbeta = res->atom[i].coord;
+		}
+    }
+    if ( !calpha || !cbeta) return 0;
 
 
+    double diff[3], dotprod;
+    // we are interested in x and y only - the whole story is taking place in cylindrical geometry
+    for (i=0; i<2; i++) diff[i]= cbeta[i] - calpha[i];
+    dotprod = 0.0; for (i=0; i<2; i++) dotprod += diff[i]* (- calpha[i]);
+    if (dotprod > 0)  return 1;
+	return 0; // here this means no, and not SUCCESS
+}
 
+int distribution_of_rho (Protein* protein, double *avg_ptr, double *stdev_ptr) {
+	double avg = 0;
+	double avg_sq = 0;
+    int resctr, ct= 0;
+    for (resctr=0; resctr<protein->length; resctr++) {
+        Residue * res = protein->residue + resctr;
+        protein->calpha[resctr] = NULL;
+        int i;
+        for (i=0; i< res->no_atoms; i++) {
+        	double rho = res->atom[i].rho;
+        	avg += rho;
+        	avg_sq += rho*rho;
+        	ct += 1;
+        }
+     }
+     if (!ct) {
+    	 fprintf (stderr, "no atomes ?\n");
+    	 exit(1);
+     }
+
+     avg /= ct;
+     avg_sq /= ct;
+     if (avg_sq < avg*avg) {
+    	 fprintf (stderr, "huh?\n");
+    	 exit(1);
+     }
+     *avg_ptr = avg;
+     *stdev_ptr = sqrt(avg_sq - avg*avg);
+
+    return 0;
+}
 

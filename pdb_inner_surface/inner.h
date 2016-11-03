@@ -60,5 +60,16 @@ int rotate_structure(Protein *protein, double new_z_direction[3]);
 
 int coords2cylindrical(Protein * protein);
 int bin_atoms(Protein *protein, double z_step, int  number_of_theta_bins, Atom **** bin_ptr, int **bin_size_ptr, int *number_of_z_bins_ptr);
+int is_pointing_inward(Residue * res);
+int distribution_of_rho (Protein* protein, double *avg_ptr, double *stdev_ptr);
 
 # endif
+
+
+
+
+
+
+
+
+

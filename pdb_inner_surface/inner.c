@@ -1,14 +1,9 @@
-/* readin in 2 pdb, presumably roughly aligned structurally, */
-/* and a list of residues in the first structure on which the*/
-/* improved alignemnt should focus */
-/* output the tranformation matrix for the second structure */
-/* for the improved alignment */
-/* Ivana, Oct, 2010 */
+/* residues lining the inside of a molecule of more or less cylindrical geometry */
+
 #include "inner.h"
 
 # define MAX_DIST_TO_CONSIDER 4.0
 
-/* the following functions are defined below main()*/
 
 
 /*************************************************************************/
@@ -51,33 +46,59 @@ int main(int argc, char * argv[]) {
 	/* coordinates to cylindrical */
 	coords2cylindrical(&protein);
 	/* bin atoms by z and theta */
-	double del_z = 1.0;
-	int number_of_theta_bins = 72, number_of_z_bins;
-	Atom *** bin; // we are binning atom pointers
-	int *bin_size; // number of atoms in each bin
-	bin_atoms(&protein, del_z, number_of_theta_bins,  &bin,  &bin_size, &number_of_z_bins);
-	/* find min rho atom for each bin */
-	/* find set of residues that belong to min rho */
-	/* half the bin size and repeat */
-	/* if the set of residues remained the same, output the set of residues */
-	int i, tot_bins = number_of_theta_bins * number_of_z_bins;
-	for (i = 0; i < tot_bins; i++) {
-		int a;
-		double min_rho = 10000;
-		Atom * min_atom_ptr = NULL;
-		for (a = 0; a < bin_size[i]; a++) {
-			double rho = bin[i][a]->rho;
-			if (rho < min_rho) {
-				min_rho = rho;
-				min_atom_ptr = bin[i][a];
+
+	if (0) { // sounds like a good idea, but its not working
+		double del_z = 1.0;
+		int number_of_theta_bins = 72, number_of_z_bins;
+		Atom *** bin; // we are binning atom pointers
+		int *bin_size; // number of atoms in each bin
+		bin_atoms(&protein, del_z, number_of_theta_bins,  &bin,  &bin_size, &number_of_z_bins);
+		/* find min rho atom for each bin */
+		/* find set of residues that belong to min rho */
+		/* half the bin size and repeat */
+		/* if the set of residues remained the same, output the set of residues */
+		int i, tot_bins = number_of_theta_bins * number_of_z_bins;
+		for (i = 0; i < tot_bins; i++) {
+			int a;
+			double min_rho = 10000;
+			Atom * min_atom_ptr = NULL;
+			for (a = 0; a < bin_size[i]; a++) {
+				double rho = bin[i][a]->rho;
+				if (rho < min_rho) {
+					min_rho = rho;
+					min_atom_ptr = bin[i][a];
+				}
 			}
+			if (!min_atom_ptr) continue;
+			Residue *res = min_atom_ptr->parent_residue;
+			// check direction of the sidechain - keep only if facing inwards
+			// if not pointing inward residue continue
+		    if (is_pointing_inward(res) )
+		    	printf(" %c %s %5.1lf \n", res->chain, res->pdb_id, min_rho);
 		}
-		if (!min_atom_ptr) continue;
-		Residue *res = min_atom_ptr->parent_residue;
-		// check direction of the sidechain - keep only if facing inwards
-		printf(" %c %s %5.1lf \n", res->chain, res->pdb_id, min_rho);
 	}
 
+	// other approach - distribution in rho, take anything that is on standard deviation or more
+	// closer to the center than the average
+	double avg_rho, stdev_rho;
+	distribution_of_rho(&protein, &avg_rho, &stdev_rho);
+	printf("  avg rho %5.1lf  stdev %5.1lf \n",  avg_rho, stdev_rho);
+	int resctr;
+    for (resctr=0; resctr<protein.length; resctr++) {
+        Residue * res = protein.residue + resctr;
+        int inner = 0, i;
+        double min_rho = 0;
+        for (i=0; i< res->no_atoms; i++) {
+			if (  (res->atom[i].rho - avg_rho)/stdev_rho < -1) {
+				min_rho = res->atom[i].rho;
+				inner=1;
+				break;
+			}
+        }
+	    if (inner )
+	    	printf(" %c %s %5.1lf \n", res->chain, res->pdb_id, min_rho);
+
+     }
 
 	return 0;
 }

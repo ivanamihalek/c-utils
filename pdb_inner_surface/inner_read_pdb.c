@@ -27,8 +27,6 @@ int find_calpha ( Protein *protein){
 
 }
 /************************************************************/
-
-
 int read_pdb(char * pdbname, Protein * protein, char chain_id) {
 
 	Residue * sequence;
