@@ -1,8 +1,8 @@
 #include "inner.h"
 
-#define MAX_ATOM_BINS  100
+#define MAX_ATOM_BINS  1000
 #define SMALL_BUF 50
-int bin_atoms(Protein *protein, double z_step, int  number_of_theta_bins, Atom **** bin_ptr, int *number_of_z_bins_ptr){
+int bin_atoms(Protein *protein, double z_step, int  number_of_theta_bins, Atom **** bin_ptr, int ** bin_size_ptr, int *number_of_z_bins_ptr){
 
 	if (z_step<1.e-4) {
 		fprintf (stderr, "z_tep too small. Convergence problem?\n");
@@ -60,24 +60,9 @@ int bin_atoms(Protein *protein, double z_step, int  number_of_theta_bins, Atom *
         }
     }
 
-    for (i=0; i<tot_bins; i++) {
-    	int a;
-    	double min_rho = 10000;
-    	Atom * min_atom_ptr = NULL;
-    	for (a=0; a<bin_size[i]; a++) {
-    		double rho = bin[i][a]->rho;
-    		if (rho < min_rho) {
-    			min_rho = rho;
-    			min_atom_ptr = bin[i][a];
-    		}
-    	}
-    	if (!min_atom_ptr) continue;
-    	Residue *res = min_atom_ptr->parent_residue;
-    	printf ( " %c %s \n", res->chain, res->pdb_id);
-
-    }
 
 	*bin_ptr = bin;
+	*bin_size_ptr = bin_size;
 	*number_of_z_bins_ptr = number_of_z_bins;
 	return 0;
 }

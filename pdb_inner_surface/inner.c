@@ -52,13 +52,32 @@ int main(int argc, char * argv[]) {
 	coords2cylindrical(&protein);
 	/* bin atoms by z and theta */
 	double del_z = 1.0;
-	int number_of_theta_bins = 36, number_of_z_bins;
+	int number_of_theta_bins = 72, number_of_z_bins;
 	Atom *** bin; // we are binning atom pointers
-	bin_atoms(&protein, del_z, number_of_theta_bins,  &bin, &number_of_z_bins);
+	int *bin_size; // number of atoms in each bin
+	bin_atoms(&protein, del_z, number_of_theta_bins,  &bin,  &bin_size, &number_of_z_bins);
 	/* find min rho atom for each bin */
 	/* find set of residues that belong to min rho */
 	/* half the bin size and repeat */
 	/* if the set of residues remained the same, output the set of residues */
+	int i, tot_bins = number_of_theta_bins * number_of_z_bins;
+	for (i = 0; i < tot_bins; i++) {
+		int a;
+		double min_rho = 10000;
+		Atom * min_atom_ptr = NULL;
+		for (a = 0; a < bin_size[i]; a++) {
+			double rho = bin[i][a]->rho;
+			if (rho < min_rho) {
+				min_rho = rho;
+				min_atom_ptr = bin[i][a];
+			}
+		}
+		if (!min_atom_ptr) continue;
+		Residue *res = min_atom_ptr->parent_residue;
+		// check direction of the sidechain - keep only if facing inwards
+		printf(" %c %s %5.1lf \n", res->chain, res->pdb_id, min_rho);
+	}
+
 
 	return 0;
 }

@@ -59,6 +59,6 @@ int min_index (double vec[3]);
 int rotate_structure(Protein *protein, double new_z_direction[3]);
 
 int coords2cylindrical(Protein * protein);
-int bin_atoms(Protein *protein, double z_step, int  number_of_theta_bins, Atom **** bin_ptr, int *number_of_z_bins_ptr);
+int bin_atoms(Protein *protein, double z_step, int  number_of_theta_bins, Atom **** bin_ptr, int **bin_size_ptr, int *number_of_z_bins_ptr);
 
 # endif
