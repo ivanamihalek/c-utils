@@ -89,6 +89,7 @@ int main(int argc, char * argv[]) {
         int inner = 0, i;
         double min_rho = 0;
         for (i=0; i< res->no_atoms; i++) {
+			//if (  (res->atom[i].rho - avg_rho)/stdev_rho > 1) {
 			if (  (res->atom[i].rho - avg_rho)/stdev_rho < -1) {
 				min_rho = res->atom[i].rho;
 				inner=1;

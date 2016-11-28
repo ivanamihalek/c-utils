@@ -5,6 +5,12 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+//find the maximum size that is supported by Linux sockets:
+//bash>  sysctl net.core.rmem_max
+// net.core.rmem_max = 212992
+// apparently, the units are  bytes
+
+
 char *socket_path = "/tmp/igraph_daddy";
 int MAX_BUF=1024*10;
 
@@ -27,7 +33,7 @@ int main(int argc, char *argv[]) {
     
 #ifdef LONG_INPUT
     #ifdef TOO
-    MAX_BUF *= 50;
+    MAX_BUF = 212990;
     # else
     MAX_BUF *= 5;
     # endif
@@ -68,7 +74,7 @@ int main(int argc, char *argv[]) {
     while (strlen(buf)+strlen(" 12345 6789 ")<MAX_BUF) sprintf(buf+strlen(buf),  " 12345 6789 ");
 #endif
 
-    int size = strlen(buf)+1;
+    int size = strlen(buf);
     int retval;
 
     //send some data
@@ -78,10 +84,11 @@ int main(int argc, char *argv[]) {
     aux_buf = emalloc(100);
     memcpy (aux_buf, buf, 30);
     printf (" ... sending big input (%d bytes)  %30s ...\n", size, aux_buf);
+    printf (" Note the max buf size supported by unix sockets on your system. (sysctl net.core.rmem_max) \n");
     free(aux_buf);
 # endif
     retval = send(fd, buf, size, 0);
-    //}
+    
     printf ("done sending\n");
     if (retval < 0) {
  	perror ("Send failed");
@@ -97,7 +104,11 @@ int main(int argc, char *argv[]) {
     }
     #ifdef LONG_INPUT
     sprintf (buf+100, " ...");
-    buf[strlen(buf)] = '\0';
+    if (strlen(buf)>0) {
+      buf[strlen(buf)-1] = '\0';
+    } else {
+      
+    }
     #endif    
     printf ("%s  \n", buf);
 #endif    
