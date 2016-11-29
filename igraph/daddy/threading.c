@@ -3,14 +3,14 @@
 ////////////////////////////////////
 int  create_socket_connection() {
     struct sockaddr_un addr;
-    int fd = socket(AF_UNIX, SOCK_STREAM, 0);
+    int fd = socket(PF_UNIX, SOCK_STREAM, 0);
     if (fd==-1) {
  	perror("socket error");
 	exit(-1);
     }
     unlink(SOCKET_PATH);
     memset(&addr, 0, sizeof(addr));
-    addr.sun_family = AF_UNIX;
+    addr.sun_family = PF_UNIX;
     if (*SOCKET_PATH == '\0') {
 	*addr.sun_path = '\0';
 	strncpy(addr.sun_path+1, SOCKET_PATH+1, sizeof(addr.sun_path)-2);
@@ -33,7 +33,8 @@ void *thread_handler(void *inptr) {
 
     thread_handler_arg *thread_handler_arg_ptr = (thread_handler_arg *) inptr;
     // read from connection
-    char *input_buffer  = emalloc (BUF_BLOCK);  curr_input_buf_size=BUF_BLOCK;
+    char *input_buffer  = emalloc (BUF_BLOCK);
+    int curr_input_buf_size=BUF_BLOCK;
     char *current_write_pos = input_buffer;
     char *output_buffer = NULL;
     // First, read the length of the text message from the socket.
@@ -41,6 +42,10 @@ void *thread_handler(void *inptr) {
     int client_socket_id = thread_handler_arg_ptr->client_connection_id;
     int done = 0;
     int panic_ctr = 0;
+    char fnm[100] = {'\0'};
+    sprintf (fnm, "/home/ivana/scratch/threadcon%d.log",client_socket_id); 
+    //FILE * fptr = efopen(fnm, "w");
+    //fprintf ( fptr, " hello  connection %d \n", client_socket_id);
     while (!done) {
 	int retv = recv(client_socket_id, current_write_pos, BUF_BLOCK, 0);
 	if ( retv  <  0) {
@@ -53,7 +58,7 @@ void *thread_handler(void *inptr) {
 	    goto cleanup_and_exit;
 	}
 	done = (retv<BUF_BLOCK);
-	if (!done) increase_buf_size (&input_buffer, &current_write_pos);
+	if (!done) increase_buf_size (&input_buffer, &curr_input_buf_size, &current_write_pos);
     }
     // parse the input
     igraph_arg ig_args;
@@ -73,10 +78,12 @@ void *thread_handler(void *inptr) {
     }
 
 cleanup_and_exit:
+    //fprintf ( fptr, " closing connection %d \n", client_socket_id);
+    //fclose(fptr);
     if (ig_args.node_list) free(ig_args.node_list);
     if (input_buffer) free (input_buffer);
     if (output_buffer) free (output_buffer);
-    free (thread_handler_arg_ptr);
+    thread_handler_arg_ptr -> job_done = 1;
     return NULL;
 }
 

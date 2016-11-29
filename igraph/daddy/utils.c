@@ -24,14 +24,16 @@ void * emalloc(int size) {
    return ptr;
 }
 
-void increase_buf_size (char ** buffer, char ** current_write_pos) {
+void increase_buf_size (char ** buffer, int *curr_input_buf_size_ptr, char ** current_write_pos) {
     char  *tmp_buffer_ptr;
+    int curr_input_buf_size = *curr_input_buf_size_ptr;
     tmp_buffer_ptr = emalloc(curr_input_buf_size + BUF_BLOCK);
     memcpy (tmp_buffer_ptr, *buffer, curr_input_buf_size);
     *current_write_pos =  tmp_buffer_ptr + curr_input_buf_size;
     free (*buffer);
     *buffer = tmp_buffer_ptr;
     curr_input_buf_size += BUF_BLOCK;
+    *curr_input_buf_size_ptr = curr_input_buf_size;
     return;
 }
 

@@ -173,7 +173,7 @@ int path (igraph_arg *ig_args, char ** output_buffer_ptr) {
     
     result_cleanup(&result);
     igraph_vs_destroy(&vertex_to);
-
+    igraph_vector_destroy   (&nrgeo);
     
     return 0;
 }

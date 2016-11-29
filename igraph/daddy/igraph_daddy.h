@@ -20,7 +20,6 @@
 
 // hardcoded
 extern char *SOCKET_PATH;
-extern int curr_input_buf_size;
 
 //thread handler arguments - must be wrapped in a single structure
 typedef struct {
@@ -28,7 +27,8 @@ typedef struct {
     int client_connection_id;
     // graph pointer
     void * graph_ptr;
-    //graph * graph_ptr;
+    // flag to signal job competion
+    int job_done;
 } thread_handler_arg;
 
 typedef enum {UNK, NEIGHBORS, PATH} igraph_method;
@@ -45,7 +45,7 @@ typedef struct {
 // utility functions
 FILE * efopen(char * name, char * mode);
 void * emalloc(int size);
-void increase_buf_size (char ** buffer, char ** current_write_pos);
+void increase_buf_size (char ** buffer, int*curr_input_buf_size_ptr,  char ** current_write_pos);
 int contains_nondigit (char * string);
 int tokenize (char token[MAX_TOK][TOKENLENGTH], int * max_token,
 	       char * line , char comment_char);

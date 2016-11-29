@@ -2,6 +2,7 @@
 
 // hardcoded
 char *SOCKET_PATH = "/tmp/igraph_daddy";
+int MAX_THREADS   = 10
 
 //////////////////////////////////////////////////
 int main ( int argc, char * argv[]) {
@@ -20,11 +21,60 @@ int main ( int argc, char * argv[]) {
 
     printf ("daddy's listening ... \n");
     
-    // main loop acepting the connection and solving the task    
+    // main loop acepting the connection and solving the task
+    thread_handler_arg **thread_pool = emalloc(MAX_THREADS*sizeof(thread_handler_arg));
+    int number_of_threads = 0;
     while (1) {
 	int client_connection_id = accept(socket_id, NULL, NULL);
 	if (client_connection_id < 0)  continue; // accept error
-	pthread_t solver_thread;
+        printf (" opening connection %d \n", client_connection_id);
+
+	// if the number of assigned threads is akready maxed out, wait for the queue to drain
+	int done = 0;
+	while (!done) {
+	    if (number_of_threads < MAX_THREADS) {
+		assign_thread (thread_handler_arg **thread_pool, int * number_of_threads);
+		done = 1;
+	    } else {
+		thread_pool_cleanup(thread_pool, &number_of_threads);
+	    }
+	    // else check the timee: if timeout, done
+	    //timeout = ;
+	    
+	}
+
+    }
+    return 0;
+}
+//rename thread_handler_arg to thread_args; re-checkk with valgrind when done
+
+    int thread_timeout(thread_handler_arg * thread_handler_arg_ptr) {
+	// if time(now) - thread_handler_arg-> time(started) > TIME_MAX return true
+	// otherwise return false
+	
+    }
+    
+
+int thread_pool_cleanup (thread_handler_arg **thread_pool, int * number_of_threads) {
+    int t;
+    int new_number_of_threads = number_of_threads;
+    for (t=0; t< number_of_threads; t++) {
+	int done = thread_pool[t] -> job_done;
+	if ( !done   && ! thread_timeout(thread_pool[t]) continue;
+	// free the mem allocated at the pointer
+	free(thread_pool[t]);
+	// rearrange the pool array
+	memmove(thread_pool+t, thread_pool+t+1, (MAX_THREADS-t)*sizeof(thread_handler_arg) );
+	new_number_of_threads --;
+    }
+    return 0;
+}
+
+
+
+int assign_thread (thread_handler_arg **thread_pool, int * number_of_threads) {
+
+ 	pthread_t solver_thread;
 	// thread_handler arg structure containts both the client_connection_id, 
 	// and the pointer to the graph structure
 	// we want to allocate it anew each time, and will let
@@ -45,6 +95,8 @@ int main ( int argc, char * argv[]) {
 	    perror("could not create thread");
 	    return 1;
 	}
-    }
-    return 0;
+	thread_pool[number_of_threads] = thread_handler_arg_ptr;
+	number_of_threads ++;
+	return 0;
+    
 }
