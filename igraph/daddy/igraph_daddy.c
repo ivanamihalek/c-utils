@@ -2,8 +2,8 @@
 
 // hardcoded
 char *SOCKET_PATH = "/tmp/igraph_daddy";
-int MAX_THREADS   = 10
-
+int MAX_THREADS   = 10;
+    
 //////////////////////////////////////////////////
 int main ( int argc, char * argv[]) {
     // arguments: path to graph
@@ -40,19 +40,18 @@ int main ( int argc, char * argv[]) {
 	    }
 	    // else check the timee: if timeout, done
 	    //timeout = ;
-	    
 	}
-
+	
     }
     return 0;
 }
 //rename thread_handler_arg to thread_args; re-checkk with valgrind when done
 
-    int thread_timeout(thread_handler_arg * thread_handler_arg_ptr) {
+int thread_timeout(thread_handler_arg * thread_handler_arg_ptr) {
 	// if time(now) - thread_handler_arg-> time(started) > TIME_MAX return true
 	// otherwise return false
 	
-    }
+}
     
 
 int thread_pool_cleanup (thread_handler_arg **thread_pool, int * number_of_threads) {
@@ -61,18 +60,18 @@ int thread_pool_cleanup (thread_handler_arg **thread_pool, int * number_of_threa
     for (t=0; t< number_of_threads; t++) {
 	int done = thread_pool[t] -> job_done;
 	if ( !done   && ! thread_timeout(thread_pool[t]) continue;
-	// free the mem allocated at the pointer
-	free(thread_pool[t]);
-	// rearrange the pool array
-	memmove(thread_pool+t, thread_pool+t+1, (MAX_THREADS-t)*sizeof(thread_handler_arg) );
-	new_number_of_threads --;
+	     // free the mem allocated at the pointer
+	     free(thread_pool[t]);
+	     // rearrange the pool array
+	     memmove(thread_pool+t, thread_pool+t+1, (MAX_THREADS-t)*sizeof(thread_handler_arg) );
+	     new_number_of_threads --;
+	     }
+	return 0;
     }
-    return 0;
-}
 
 
 
-int assign_thread (thread_handler_arg **thread_pool, int * number_of_threads) {
+    int assign_thread (thread_handler_arg **thread_pool, int * number_of_threads) {
 
  	pthread_t solver_thread;
 	// thread_handler arg structure containts both the client_connection_id, 
@@ -84,10 +83,10 @@ int assign_thread (thread_handler_arg **thread_pool, int * number_of_threads) {
 	thread_handler_arg_ptr -> client_connection_id = client_connection_id;
 	thread_handler_arg_ptr -> graph_ptr = &graph;
 	/* int pthread_create(pthread_t *thread, const pthread_attr_t *attr,
-                          void *(*start_routine) (void *), void *arg);
-	  The pthread_create() function starts a new thread in the calling
-          process.  The new thread starts execution by invoking
-          start_routine(); arg is passed as the sole argument of start_routine().
+	   void *(*start_routine) (void *), void *arg);
+	   The pthread_create() function starts a new thread in the calling
+	   process.  The new thread starts execution by invoking
+	   start_routine(); arg is passed as the sole argument of start_routine().
 	*/
 	int pthred_retval = pthread_create (&solver_thread, NULL,
 					    thread_handler, thread_handler_arg_ptr);
@@ -99,4 +98,4 @@ int assign_thread (thread_handler_arg **thread_pool, int * number_of_threads) {
 	number_of_threads ++;
 	return 0;
     
-}
+    }
