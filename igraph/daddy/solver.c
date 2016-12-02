@@ -1,7 +1,7 @@
 #include "igraph_daddy.h"
 
 
-#define MAX_ORDER 5 // no more than 5 hops away
+#define MAX_ORDER 10 // no more than 5 hops away
 void construct_graph(char *filename, igraph_t *graph_ptr){
 
     FILE * infile  =  efopen(filename, "r") ;

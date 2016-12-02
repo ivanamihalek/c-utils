@@ -12,24 +12,38 @@
 #include<pthread.h>   //for threading , link with lpthread
 #include<sys/signal.h>
 #include<igraph.h>
-
+#include <time.h>
 // input tokenizer array
 #define MAX_TOK 1010
 #define TOKENLENGTH 30
 #define BUF_BLOCK 1024
 
-// hardcoded
-extern char *SOCKET_PATH;
+# define MAX_THREADS   10
+//clock_t TIME_MAX = 60*CLOCKS_PER_SEC; //I have to make sure that the requests are small enough
+# define  TIME_MAX  100 //I have to make sure that the requests are small enough
+
+
 
 //thread handler arguments - must be wrapped in a single structure
 typedef struct {
-    // connection id
+    // ids
+    pthread_t pthread_id;
     int client_connection_id;
     // graph pointer
     void * graph_ptr;
     // flag to signal job competion
     int job_done;
-} thread_handler_arg;
+    // the job will be timed out if needed:
+    clock_t start_time;
+} thread_args;
+
+typedef struct {
+    thread_args ** args;
+    int number;
+} threadpool;
+
+
+
 
 typedef enum {UNK, NEIGHBORS, PATH} igraph_method;
 
@@ -47,10 +61,10 @@ FILE * efopen(char * name, char * mode);
 void * emalloc(int size);
 void increase_buf_size (char ** buffer, int*curr_input_buf_size_ptr,  char ** current_write_pos);
 int contains_nondigit (char * string);
-int tokenize (char token[MAX_TOK][TOKENLENGTH], int * max_token,
-	       char * line , char comment_char);
+int tokenize (char token[MAX_TOK][TOKENLENGTH], int * max_token, char * line , char comment_char);
+
 // threading related functions
-int  create_socket_connection();
+int  create_socket_connection(const char * socket_path);
 void *thread_handler(void *inptr);
 
 // igraph-related functions
