@@ -8,7 +8,7 @@ HERE = $(shell pwd)
 
 NAME = daddy
 
-OPTM =  -g  #  -g -O0 # recommended combo for valgrind
+OPTM =  -O #  -g -O0 # recommended combo for valgrind
 
 VPATH = ./
 
@@ -22,7 +22,7 @@ ifeq (${PLATFORM},Linux)
 	PD =  -DLINUX 
 endif
 
-DEFINES =  $(PD)  -DVERBOSE
+DEFINES =  $(PD) # -DVERBOSE
 SOURCES.F = 
 SOURCES.f = 
 SOURCES.c =  igraph_daddy.c utils.c threading.c solver.c

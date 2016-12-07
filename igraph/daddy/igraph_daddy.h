@@ -13,14 +13,19 @@
 #include<sys/signal.h>
 #include<igraph.h>
 #include <time.h>
+#include <signal.h> // sigaction(), sigsuspend(), sig*()
+#include <unistd.h> // alarm()
+
+
 // input tokenizer array
 #define MAX_TOK 1010
 #define TOKENLENGTH 30
 #define BUF_BLOCK 1024
 
+# define CONNECTION_QUEUE_SIZE 1000
 # define MAX_THREADS   10
-//clock_t TIME_MAX = 60*CLOCKS_PER_SEC; //I have to make sure that the requests are small enough
-# define  TIME_MAX  100 //I have to make sure that the requests are small enough
+# define TIME_MAX 60*CLOCKS_PER_SEC
+//# define  TIME_MAX  1000 //I have to make sure that the requests are small enough
 
 
 
@@ -29,19 +34,28 @@ typedef struct {
     // ids
     pthread_t pthread_id;
     int client_connection_id;
-    // graph pointer
-    void * graph_ptr;
     // flag to signal job competion
     int job_done;
     // the job will be timed out if needed:
     clock_t start_time;
+    // thread will make it own copy:
+    void* copied_to;
 } thread_args;
 
+// connection queue
 typedef struct {
-    thread_args ** args;
-    int number;
-} threadpool;
+    pthread_mutex_t lock;
+    int * position;
+    int population;
+} fifo;
 
+// thread pool
+typedef struct {
+    pthread_mutex_t lock;
+    pthread_rwlock_t args_lock;
+    thread_args ** args;
+    int population;
+} pool;
 
 
 
@@ -65,7 +79,7 @@ int tokenize (char token[MAX_TOK][TOKENLENGTH], int * max_token, char * line , c
 
 // threading related functions
 int  create_socket_connection(const char * socket_path);
-void *thread_handler(void *inptr);
+void *thread_payload_function(void *inptr);
 
 // igraph-related functions
 void construct_graph (char *filename, igraph_t *graph_ptr);

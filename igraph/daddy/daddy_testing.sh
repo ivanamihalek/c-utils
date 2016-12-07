@@ -112,15 +112,6 @@ echo "test: node with no neighbors - zero hops away"
 gcc -o pinger  pinger.c  
 ./pinger "neighbors  3  $dock6" 
 
-#echo; echo "==================================="
-#echo "test: bombarding the socket with requests"
-#gcc -o pinger  pinger.c
-#for  i in {1..2000}
-#do
-#    echo "request $i"
-#    ./pinger "path  0  $cdc42 $tgfbr3  "
-#done	  
-
 echo; echo "==================================="
 echo "test: request to extensive (to be timed out)"
 gcc -o pinger  pinger.c
