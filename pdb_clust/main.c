@@ -8,7 +8,7 @@
 
 /************************************************************/
 int main ( int argc, char * argv[]) {
-    
+
     char pdbname[150] = {'\0'};
     char selection_file[150] = {'\0'};
     Residue * sequence;
@@ -21,35 +21,36 @@ int main ( int argc, char * argv[]) {
     char chain_id = '\0';
     FILE * fclust = NULL;
 
-    
+
     if ( argc < 5 ) {
-	fprintf (stderr,
-		 "Usage: %s <pdbfile>  <chain id>|'-'  <selection file>  <cutoff dist> \n",
-		 argv[0]);
-	exit (1);
+      	fprintf (stderr,
+      		 "Usage: %s <pdbfile>  <chain id>|'-'  <selection file>  <cutoff dist> \n",
+      		 argv[0]);
+      	exit (1);
     }
     sprintf ( pdbname, "%s", argv[1]);
     chain_id =  argv[2][0]=='-' ? '\0' : argv[2][0];
     sprintf ( selection_file, "%s", argv[3]);
     cutoff_dist = atof ( argv[4]);
+    printf ("cutoff distance: %5.2lf Angstroms\n", cutoff_dist);
 
-    /* input the structure */ 
+    /* input the structure */
     if ( read_pdb ( pdbname, &chain_id, &sequence, &no_res) ) exit (1);
     printf ("there are %d residues in %s, chain %c.\n",  no_res, pdbname, chain_id);
 
     /* input selection */
     selected = emalloc (no_res*sizeof(int));
     if (! selected) {
-	fprintf (stderr, "error allocating selection array\n");
-	exit(1); // leaky, leaky
-    } 
+      	fprintf (stderr, "error allocating selection array\n");
+      	exit(1); // leaky, leaky
+    }
     if ( read_selection (sequence, no_res, selection_file, selected) ) exit (1);
-    
+
     /* allocate space for dist matrix */
     distmat = (double**) dmatrix (0,  no_res-1, 0,  no_res-1);
     /* calculate dist */
     if ( determine_dist_matrix(distmat,  sequence, no_res) ) exit(1);
-    
+
 
     /* cluster counting ... */
     {
@@ -57,12 +58,12 @@ int main ( int argc, char * argv[]) {
 	int * cluster_count, *mask;
 	int ** neighbors;
 	int res1, res2;
-	    
+
 	cluster_count       =  (int *) emalloc ( (no_res+1)*sizeof(int));
 	mask                =  (int *) emalloc ( (no_res+1)*sizeof(int));
 	cluster             =  imatrix (0, no_res, 0, no_res);
 	neighbors           =  imatrix (0, no_res-1, 0, no_res-1);
-	
+
 	for (res1=0;  res1 < no_res; res1++ ) {
 	    neighbors [res1][res1] = 1;
 	    for (res2= res1+1; res2 < no_res; res2++ ) {
@@ -96,7 +97,7 @@ int main ( int argc, char * argv[]) {
 		printf  (" selected  %4d    random score = %8.2e\n",  no_selected, score);
 	    }
 	}
-	
+
     }
 
      /* output */
@@ -108,19 +109,19 @@ int main ( int argc, char * argv[]) {
 	if ( !c ) {
 	    fprintf ( fclust,"\t isolated:\n");
 	} else {
-	    fprintf ( fclust,"\t cluster size: %3d \n", cluster[c][0]); 
+	    fprintf ( fclust,"\t cluster size: %3d \n", cluster[c][0]);
 	}
 	for ( res_ctr=1; res_ctr <=  cluster[c][0]; res_ctr++) {
 	    fprintf ( fclust, "%s  \n", sequence[ cluster[c][res_ctr] ].pdb_id );
 	}
-	
+
     }
     fprintf (fclust, "\nclustering  z-score:  %8.3f\n", score);
 
- 
-    
+
+
     return 0;
 
-    
-    
+
+
 }
