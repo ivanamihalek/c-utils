@@ -26,28 +26,32 @@ int main ( int argc, char * argv[]) {
 	exit(1);
     }
     if ( argc == 3 ) {
-	cutoff = atof( argv[2] );
+    	cutoff = atof( argv[2] );
     }
     for ( chain_ctr=0; chain_ctr<MAX_CHAINS; chain_ctr++) {
-	chain_start[chain_ctr] = -1;
+    	chain_start[chain_ctr] = -1;
     }
-    if (  read_pdb_file(argv[1], &pdb_map,  &map_length, chain_start) ) {
-	fprintf (stderr, "Error reading pdbfile.\n");
-	return 1;
+    if (read_pdb_file(argv[1], &pdb_map,  &map_length, chain_start) ) {
+        fprintf (stderr, "Error reading pdbfile.\n");
+        return 1;
     }
+    printf("PDB input ok.\n");
 
-    if (  process_pdb  (pdb_map, map_length, chain_start, & chain_info, &no_of_chains )  ) {
-	fprintf (stderr, "Error processing pdbfile.\n");
-	return 1;
+    if (process_pdb  (pdb_map, map_length, chain_start, & chain_info, &no_of_chains )  ) {
+        fprintf (stderr, "Error processing pdbfile.\n");
+        return 1;
     }
+    printf("PDB processing ok.\n");
 
-    if ( neighbors(pdb_map, map_length, chain_info, no_of_chains) ) {
-	fprintf (stderr, "Error processing neighbor info.\n");
-	return 1;
-    }			
-    if (  find_interface (pdb_map, map_length, chain_info, no_of_chains, cutoff) ) {
-	fprintf (stderr, "Error finding interface.\n");
-	return 1;
+    if (neighbors(pdb_map, map_length, chain_info, no_of_chains) ) {
+        fprintf (stderr, "Error processing neighbor info.\n");
+        return 1;
+    }
+    printf("Neighbors  ok.\n");
+
+    if (find_interface (pdb_map, map_length, chain_info, no_of_chains, cutoff) ) {
+        fprintf (stderr, "Error finding interface.\n");
+        return 1;
     }			
     
     return 0; 

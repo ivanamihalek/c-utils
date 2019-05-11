@@ -1,6 +1,6 @@
 CFLAGS=     # options for C compiler
 FFLAGS =
-FCOMPL= g77   # name of Fortran compiler
+FCOMPL= gcc   # name of Fortran compiler
 CCOMPL = gcc -Wall
 CPLUSCOMPL = g++
 
@@ -23,7 +23,7 @@ ifeq (${PLATFORM},Linux)
 	PD =  -DLINUX
 endif
 
-DEFINES =  $(PD)  -DVERBOSE 
+DEFINES =  $(PD)   -DVERBOSE
 SOURCES.F = 
 SOURCES.f = 
 SOURCES.c =  bind_pot.c ifc_vec.c  main.c momin.c  process_pdb.c  neighbors.c read_pdb.c  utils.c

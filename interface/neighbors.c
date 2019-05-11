@@ -6,9 +6,9 @@
 #include <ctype.h>
 #include <math.h>
 
-/* how many nieghbors for each atom within the chain ? how far is the atom from their CM?*/
+/* how many neighbors for each atom within the chain ? how far is the atom from their CM?*/
 
-int neighbors (Pdb_map * pdb_map,int map_length,  Chain_info * chain_info, int  no_of_chains) {
+int neighbors (Pdb_map * pdb_map, int map_length,  Chain_info * chain_info, int  no_of_chains) {
 
     int c, atom;
     int atom1, atom2;
@@ -24,8 +24,8 @@ int neighbors (Pdb_map * pdb_map,int map_length,  Chain_info * chain_info, int  
     cm_z = (double*) calloc ( map_length, sizeof(double));
 
     if ( !cm_x || ! cm_y || !cm_z ) {
-	fprintf (stderr, "Error allocating cm arrays.\n");
-	exit (1);
+        fprintf (stderr, "Error allocating cm arrays.\n");
+        exit (1);
     }
     
     cutoff = 2.0;
@@ -90,28 +90,23 @@ int neighbors (Pdb_map * pdb_map,int map_length,  Chain_info * chain_info, int  
 	//atom1, dist );
     }
 
-
-
-
-
-
     
      avg = avg_bb = 0;
      no_bb = 0;
      for (atom=0; atom< map_length; atom++ ) {
-	 //printf (" %6d   %3d\n", atom, pdb_map[atom].no_of_neighbors);
-	 avg += pdb_map[atom].no_of_neighbors;
-	 if ( charcount(pdb_map[atom].name_atom,PDB_ATOM_ATOM_NAME_LEN) ==1 ){
-	     avg_bb  += pdb_map[atom].no_of_neighbors;
-	     no_bb++;
-	 }
+         //printf (" %6d   %3d\n", atom, pdb_map[atom].no_of_neighbors);
+         avg += pdb_map[atom].no_of_neighbors;
+         if ( charcount(pdb_map[atom].name_atom,PDB_ATOM_ATOM_NAME_LEN) ==1 ){
+             avg_bb  += pdb_map[atom].no_of_neighbors;
+             no_bb++;
+         }
      }
      avg_dist_to_cm /= map_length;
      avg_sq /= map_length;
      std_dev = sqrt ( avg_sq -  avg_dist_to_cm*avg_dist_to_cm );
 
      for (atom1=0; atom1 < map_length; atom1++) {
-	 pdb_map[atom1].dist_to_cm = 	(pdb_map[atom1].dist_to_cm - avg_dist_to_cm)/std_dev;
+    	 pdb_map[atom1].dist_to_cm = 	(pdb_map[atom1].dist_to_cm - avg_dist_to_cm)/std_dev;
      }
     
 # if 1

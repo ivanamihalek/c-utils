@@ -120,5 +120,6 @@ typedef struct {
     int *residue_end;
 } Chain_info;
 
+#define MAX_CHAINS 30
 
 # endif
