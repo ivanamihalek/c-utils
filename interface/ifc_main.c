@@ -38,8 +38,7 @@ int main ( int argc, char * argv[]) {
         chain_ctr++;
     }
     printf ("\n\n");
-    exit(1);
-    
+
     if (find_interface (pdb_map, map_length, chain_start, cutoff) ) {
         fprintf (stderr, "Error finding interface.\n");
         return 1;

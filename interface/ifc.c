@@ -183,7 +183,7 @@ int  find_interface (Pdb_map * pdb_map, int map_length, int chain_start[], doubl
                 if (interface_1[residue1] ) {
                     atom1 = chain_info[c1].residue_start[residue1];
                     printf ("\t %s %s \n", pdb_map[atom1].no_res, pdb_map[atom1].name_res);
-                    fprintf (epifile, "%s\t%.2f\n", pdb_map[atom1].no_res, interface_1[residue1] );
+                    fprintf (epifile, "%s\t%s\t%.2f\n", pdb_map[atom1].no_res, pdb_map[atom1].name_res, interface_1[residue1] );
                 }
             }
 		    fclose (epifile);
@@ -201,7 +201,7 @@ int  find_interface (Pdb_map * pdb_map, int map_length, int chain_start[], doubl
                 if ( interface_2[residue2] ) {
                     atom2 = chain_info[c2].residue_start[residue2];
                     printf ("\t %s %s \n", pdb_map[atom2].no_res, pdb_map[atom2].name_res);
-                    fprintf ( epifile,  "%s\t%.2f\n",  pdb_map[atom2].no_res, interface_2[residue2] );
+                    fprintf ( epifile,  "%s\t%s\t%.2f\n",  pdb_map[atom2].no_res,   pdb_map[atom2].name_res, interface_2[residue2] );
                 }
             }
 		    fclose (epifile);
