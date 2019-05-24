@@ -8,7 +8,7 @@ HERE = $(shell pwd)
 
 NAME = rbf
 
-OPTM =  -g
+OPTM =  -O3
 
 VPATH = ./
 

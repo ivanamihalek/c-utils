@@ -71,6 +71,7 @@ int main ( int argc, char * argv[]) {
         if (overlap_size>=noverlap) count_bigger++;
         if (overlap_size<=noverlap) count_smaller++;
     }
+    count_smaller +=1; // to remind ourselves that e cannot go below 1/nrounds in precision
     printf (" count smaller = %5d,   p smaller = %.2e\n", count_smaller, (float)count_smaller/nrounds);
     printf (" count bigger = %5d,   p bigger  = %.2e\n", count_bigger, (float)count_bigger/nrounds);
     return 0;
